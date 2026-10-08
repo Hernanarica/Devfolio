@@ -2,13 +2,9 @@ import assert from 'assert'
 import * as cheerio from 'cheerio'
 import { Feed } from 'feed'
 
+import { siteUrl } from '@/lib/site'
+
 export async function GET(req: Request) {
-  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-
-  if (!siteUrl) {
-    throw Error('Missing NEXT_PUBLIC_SITE_URL environment variable')
-  }
-
   let author = {
     name: 'Hernán',
     email: 'hernan.arica96@gmail.com',
@@ -30,7 +26,7 @@ export async function GET(req: Request) {
   })
 
   let articleIds = require
-    .context('../articles', true, /\/page\.mdx$/)
+    .context('../(site)/articles', true, /\/page\.mdx$/)
     .keys()
     .filter((key) => key.startsWith('./'))
     .map((key) => key.slice(2).replace(/\/page\.mdx$/, ''))

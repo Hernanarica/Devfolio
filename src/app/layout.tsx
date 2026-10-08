@@ -1,7 +1,6 @@
 import { type Metadata, type Viewport } from 'next'
 
 import { Providers } from '@/app/providers'
-import { Layout } from '@/components/Layout'
 import { site, siteUrl } from '@/lib/site'
 
 import '@/styles/tailwind.css'
@@ -89,11 +88,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <Providers>
-          <div className="flex w-full">
-            <Layout>{children}</Layout>
-          </div>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

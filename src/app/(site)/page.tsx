@@ -22,6 +22,7 @@ import {
   LinkedInIcon,
   WhatsAppIcon,
 } from '@/components/SocialIcons'
+import { cvPath, type Job, resume } from '@/lib/resume'
 
 function SocialLink({
   icon: Icon,
@@ -133,27 +134,25 @@ function Highlights() {
   )
 }
 
-interface Role {
-  company: string
-  title: string
-  icon: LucideIcon
-  start: string | { label: string; dateTime: string }
-  end: string | { label: string; dateTime: string }
+const jobIcons: Record<Job['id'], LucideIcon> = {
+  spotter: Dumbbell,
+  indigo: Building2,
+  freelance: Laptop,
+  kickads: Megaphone,
+  'kickads-jr': Megaphone,
 }
 
-function Role({ role }: { role: Role }) {
-  let startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
-  let startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
-
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
+function Role({ job }: { job: Job }) {
+  let Icon = jobIcons[job.id]
+  let end = job.end ?? {
+    label: 'Hoy',
+    dateTime: new Date().getFullYear().toString(),
+  }
 
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-        <role.icon
+        <Icon
           className="h-5 w-5 text-teal-500 dark:text-teal-400"
           strokeWidth={1.75}
         />
@@ -161,20 +160,20 @@ function Role({ role }: { role: Role }) {
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Empresa</dt>
         <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
-          {role.company}
+          {job.company}
         </dd>
         <dt className="sr-only">Rol</dt>
         <dd className="text-xs text-zinc-500 dark:text-zinc-400">
-          {role.title}
+          {job.title}
         </dd>
         <dt className="sr-only">Fecha</dt>
         <dd
           className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-          aria-label={`${startLabel} hasta ${endLabel}`}
+          aria-label={`${job.start.label} hasta ${end.label}`}
         >
-          <time dateTime={startDate}>{startLabel}</time>{' '}
+          <time dateTime={job.start.dateTime}>{job.start.label}</time>{' '}
           <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
+          <time dateTime={end.dateTime}>{end.label}</time>
         </dd>
       </dl>
     </li>
@@ -182,48 +181,6 @@ function Role({ role }: { role: Role }) {
 }
 
 function Resume() {
-  let present = {
-    label: 'Hoy',
-    dateTime: new Date().getFullYear().toString(),
-  }
-  let resume: Array<Role> = [
-    {
-      company: 'Spotter',
-      title: 'CTO & Cofounder',
-      icon: Dumbbell,
-      start: { label: 'Jul 2026', dateTime: '2026-07' },
-      end: present,
-    },
-    {
-      company: 'Indigo',
-      title: 'Full Stack Developer',
-      icon: Building2,
-      start: { label: 'Jul 2023', dateTime: '2023-07' },
-      end: present,
-    },
-    {
-      company: 'Freelance',
-      title: 'Full Stack Developer',
-      icon: Laptop,
-      start: '2021',
-      end: present,
-    },
-    {
-      company: 'Kickads',
-      title: 'Full Stack Developer',
-      icon: Megaphone,
-      start: { label: 'Jun 2021', dateTime: '2021-06' },
-      end: { label: 'Jul 2023', dateTime: '2023-07' },
-    },
-    {
-      company: 'Kickads',
-      title: 'JavaScript Developer Jr',
-      icon: Megaphone,
-      start: { label: 'Jul 2020', dateTime: '2020-07' },
-      end: { label: 'Jun 2021', dateTime: '2021-06' },
-    },
-  ]
-
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -234,12 +191,12 @@ function Resume() {
         <span className="ml-3">Experiencia</span>
       </h2>
       <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
+        {resume.jobs.map((job) => (
+          <Role key={job.id} job={job} />
         ))}
       </ol>
       <Button
-        href="/cv-2026.pdf"
+        href={cvPath}
         target="_blank"
         variant="secondary"
         className="group mt-6 w-full"

@@ -1,7 +1,13 @@
 import { type Metadata } from 'next'
 
+// En Vercel, si no se define NEXT_PUBLIC_SITE_URL, se usa el dominio de
+// producción que Vercel expone solo. Sin una URL absoluta y pública, las
+// redes no encuentran la imagen OG al compartir el link.
+const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000')
 ).replace(/\/$/, '')
 
 export const site = {
