@@ -1,4 +1,5 @@
 import { Layout } from '@/components/Layout'
+import { SmoothScroll } from '@/components/SmoothScroll'
 
 export default function SiteLayout({
   children,
@@ -6,8 +7,10 @@ export default function SiteLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex w-full">
-      <Layout>{children}</Layout>
-    </div>
+    <SmoothScroll>
+      <div className="flex w-full">
+        <Layout>{children}</Layout>
+      </div>
+    </SmoothScroll>
   )
 }
