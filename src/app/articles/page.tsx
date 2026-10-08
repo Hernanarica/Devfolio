@@ -4,6 +4,7 @@ import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { pageMetadata } from '@/lib/site'
 
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
@@ -21,7 +22,7 @@ function Article({ article }: { article: ArticleWithSlug }) {
           {formatDate(article.date)}
         </Card.Eyebrow>
         <Card.Description>{article.description}</Card.Description>
-        <Card.Cta>Read article</Card.Cta>
+        <Card.Cta>Leer artículo</Card.Cta>
       </Card>
       <Card.Eyebrow
         as="time"
@@ -34,19 +35,20 @@ function Article({ article }: { article: ArticleWithSlug }) {
   )
 }
 
-export const metadata: Metadata = {
-  title: 'Articles',
+export const metadata: Metadata = pageMetadata({
+  title: 'Artículos',
   description:
-    'All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.',
-}
+    'Notas sobre desarrollo full stack, datos, automatización con IA y construir productos desde cero.',
+  path: '/articles',
+})
 
 export default async function ArticlesIndex() {
   let articles = await getAllArticles()
 
   return (
     <SimpleLayout
-      title="Writing on software design, company building, and the aerospace industry."
-      intro="All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
+      title="Escritos sobre desarrollo, datos y construir productos."
+      intro="Notas sobre desarrollo full stack, datos, automatización con IA y lo que voy aprendiendo construyendo Spotter. Próximamente."
     >
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">

@@ -10,19 +10,20 @@ export async function GET(req: Request) {
   }
 
   let author = {
-    name: 'Spencer Sharp',
-    email: 'spencer@planetaria.tech',
+    name: 'Hernán',
+    email: 'hernan.arica96@gmail.com',
   }
 
   let feed = new Feed({
     title: author.name,
-    description: 'Your blog description',
+    description:
+      'Notas sobre desarrollo full stack, datos y automatización con IA.',
     author,
     id: siteUrl,
     link: siteUrl,
-    image: `${siteUrl}/favicon.ico`,
+    image: `${siteUrl}/icon.png`,
     favicon: `${siteUrl}/favicon.ico`,
-    copyright: `All rights reserved ${new Date().getFullYear()}`,
+    copyright: `© ${new Date().getFullYear()} Hernán`,
     feedLinks: {
       rss2: `${siteUrl}/feed.xml`,
     },
