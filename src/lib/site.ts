@@ -7,7 +7,7 @@ const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
 
 export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ||
-  (vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000')
+  (vercelUrl ? `https://${vercelUrl}` : 'https://www.hernanarica.com.ar')
 ).replace(/\/$/, '')
 
 export const site = {
