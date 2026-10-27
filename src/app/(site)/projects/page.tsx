@@ -9,8 +9,7 @@ import imageIndigoHub from '@/images/projects/indigohub.jpg'
 import imageMetaAlign from '@/images/projects/metaalign.webp'
 import imageMomenrise from '@/images/projects/momenrise.webp'
 import imageOmPersonal from '@/images/projects/ompersonal.jpg'
-import imageSpotterPlatform from '@/images/projects/spotter-platform.jpg'
-import imageSpotterWebsite from '@/images/projects/spotter-website.jpg'
+import imageSpotter from '@/images/projects/spotter.webp'
 import { pageMetadata } from '@/lib/site'
 
 interface Project {
@@ -24,21 +23,12 @@ interface Project {
 
 const projects: Array<Project> = [
   {
-    name: 'Spotter Platform',
+    name: 'Spotter',
     role: 'CTO & Cofounder',
     description:
-      'App que empareja a personas que entrenan en el mismo gimnasio y horario para sostener la constancia: matching, agenda de entrenamientos, confirmación de sesiones y notificaciones. Arquitectura pensada para escalar sin volverse una carga operativa.',
-    stack: ['TypeScript', 'Supabase', 'GCP', 'IA'],
-    image: imageSpotterPlatform,
-    links: [{ href: 'https://www.gospotter.app', label: 'gospotter.app' }],
-  },
-  {
-    name: 'Spotter Website',
-    role: 'CTO & Cofounder',
-    description:
-      'Sitio de lanzamiento con lista de espera para personas y gimnasios, con el que validamos la demanda antes del MVP.',
-    stack: ['Astro', 'Tailwind CSS', 'Supabase'],
-    image: imageSpotterWebsite,
+      'Una misma app en dos partes. La plataforma empareja a personas que entrenan en el mismo gimnasio y horario para sostener la constancia: matching, agenda de entrenamientos, confirmación de sesiones y notificaciones, con una arquitectura pensada para escalar sin volverse una carga operativa. La landing, con lista de espera para personas y gimnasios, es la que usamos para validar la demanda antes del MVP.',
+    stack: ['TypeScript', 'Astro', 'Supabase', 'GCP', 'IA'],
+    image: imageSpotter,
     links: [{ href: 'https://www.gospotter.app', label: 'gospotter.app' }],
   },
   {
