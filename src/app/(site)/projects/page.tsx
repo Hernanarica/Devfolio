@@ -27,7 +27,7 @@ const projects: Array<Project> = [
     role: 'CTO & Cofounder',
     description:
       'Una misma app en dos partes. La plataforma empareja a personas que entrenan en el mismo gimnasio y horario para sostener la constancia: matching, agenda de entrenamientos, confirmación de sesiones y notificaciones, con una arquitectura pensada para escalar sin volverse una carga operativa. La landing, con lista de espera para personas y gimnasios, es la que usamos para validar la demanda antes del MVP.',
-    stack: ['TypeScript', 'Astro', 'Supabase', 'GCP', 'IA'],
+    stack: ['TypeScript', 'React', 'Astro', 'Supabase', 'GCP', 'IA'],
     image: imageSpotter,
     links: [{ href: 'https://www.gospotter.app', label: 'gospotter.app' }],
   },
@@ -36,7 +36,7 @@ const projects: Array<Project> = [
     role: 'Creador · Proyecto personal',
     description:
       'Web app gratuita de hábitos que se instala en el celular desde el navegador, sin pasar por las tiendas. Registro con un toque, timer o cantidad, frecuencias flexibles, rachas que se pueden pausar, estadísticas, recordatorios push e integración con asistentes de IA vía MCP.',
-    stack: ['Next.js', 'Supabase', 'PWA', 'MCP / IA'],
+    stack: ['Next.js', 'Astro', 'Supabase', 'PWA', 'MCP / IA'],
     image: imageMomenrise,
     links: [
       { href: 'https://app.momenrise.com', label: 'Abrir la app' },
@@ -61,7 +61,7 @@ const projects: Array<Project> = [
     role: 'Full Stack Developer · Indigo',
     description:
       'Plataforma interna de Indigo. Lideré su desarrollo con un equipo de 3 personas, definiendo arquitectura, stack y procesos; optimicé costos de infraestructura y sumé ETLs y automatizaciones.',
-    stack: ['GCP', 'Supabase', 'BigQuery', 'ETLs'],
+    stack: ['React', 'GCP', 'Supabase', 'BigQuery', 'ETLs'],
     image: imageIndigoHub,
     links: [
       {
@@ -86,7 +86,7 @@ const projects: Array<Project> = [
     role: 'Full Stack',
     description:
       'Website de un proveedor de servicios de pago autorizado por el BCRA (ex Taca Taca), con landings y herramientas como el simulador de cobros, comisiones y cuotas.',
-    stack: ['Astro', 'Tailwind CSS', 'TypeScript'],
+    stack: ['Astro', 'React', 'Tailwind CSS', 'TypeScript'],
     image: imageBezzaPay,
     links: [{ href: 'https://www.bezzapay.com.ar', label: 'bezzapay.com.ar' }],
   },
