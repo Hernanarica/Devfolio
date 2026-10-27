@@ -1,7 +1,13 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react'
+import {
+  AnimatePresence,
+  motion,
+  MotionConfig,
+  useScroll,
+  useTransform,
+} from 'motion/react'
 import {
   ArrowRight,
   BarChart3,
@@ -16,7 +22,6 @@ import {
   Mail,
   MessageCircle,
 } from 'lucide-react'
-import Link from 'next/link'
 import clsx from 'clsx'
 
 import { BookCall } from '@/components/BookCall'
@@ -476,73 +481,76 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
 }
 
 export function Services() {
+  // Cada isla es una raíz de React aparte: el MotionConfig va en cada una
   return (
-    <div className="space-y-28">
-      <section>
-        <SectionTitle eyebrow="Servicios" title="En qué te puedo ayudar" />
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.title} service={service} />
-          ))}
-        </Stagger>
-      </section>
+    <MotionConfig reducedMotion="user">
+      <div className="space-y-28">
+        <section>
+          <SectionTitle eyebrow="Servicios" title="En qué te puedo ayudar" />
+          <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <ServiceCard key={service.title} service={service} />
+            ))}
+          </Stagger>
+        </section>
 
-      <section>
-        <SectionTitle eyebrow="Proceso" title="Cómo trabajamos" />
-        <Process />
-      </section>
+        <section>
+          <SectionTitle eyebrow="Proceso" title="Cómo trabajamos" />
+          <Process />
+        </section>
 
-      <section id="cotizar" className="scroll-mt-24">
-        <QuoteForm />
-      </section>
+        <section id="cotizar" className="scroll-mt-24">
+          <QuoteForm />
+        </section>
 
-      <section id="agendar" className="scroll-mt-24">
-        <SectionTitle
-          eyebrow="Agenda"
-          title="¿Preferís hablarlo? Agendá una llamada"
-        />
-        <motion.p
+        <section id="agendar" className="scroll-mt-24">
+          <SectionTitle
+            eyebrow="Agenda"
+            title="¿Preferís hablarlo? Agendá una llamada"
+          />
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400"
+          >
+            30 minutos por videollamada, sin costo ni compromiso. Elegí el día y
+            horario que te quede cómodo y charlamos sobre tu proyecto.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+            transition={{ duration: 0.6 }}
+            className="mt-8"
+          >
+            <BookCall />
+          </motion.div>
+        </section>
+
+        <section>
+          <SectionTitle eyebrow="FAQ" title="Preguntas frecuentes" />
+          <Faq />
+        </section>
+
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-3 max-w-2xl text-sm text-zinc-600 dark:text-zinc-400"
+          className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between"
         >
-          30 minutos por videollamada, sin costo ni compromiso. Elegí el día y
-          horario que te quede cómodo y charlamos sobre tu proyecto.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
-          transition={{ duration: 0.6 }}
-          className="mt-8"
-        >
-          <BookCall />
+          <p className="text-base text-zinc-600 dark:text-zinc-400">
+            ¿Querés ver lo que ya construí?
+          </p>
+          <a
+            href="/projects"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-teal-500 dark:text-teal-400"
+          >
+            Ver proyectos
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
         </motion.div>
-      </section>
-
-      <section>
-        <SectionTitle eyebrow="FAQ" title="Preguntas frecuentes" />
-        <Faq />
-      </section>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between"
-      >
-        <p className="text-base text-zinc-600 dark:text-zinc-400">
-          ¿Querés ver lo que ya construí?
-        </p>
-        <Link
-          href="/projects"
-          className="group inline-flex items-center gap-2 text-sm font-semibold text-teal-500 dark:text-teal-400"
-        >
-          Ver proyectos
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
-      </motion.div>
-    </div>
+      </div>
+    </MotionConfig>
   )
 }

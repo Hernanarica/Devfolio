@@ -1,30 +1,25 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Cal, { getCalApi } from '@calcom/embed-react'
-import { useTheme } from 'next-themes'
 import { CalendarDays } from 'lucide-react'
 
 import { site } from '@/lib/site'
+import { useResolvedTheme } from '@/libs/theme'
 
 const namespace = 'llamada-inicial'
 
 export function BookCall() {
-  let { resolvedTheme } = useTheme()
-  let [mounted, setMounted] = useState(false)
-  let theme: 'dark' | 'light' = resolvedTheme === 'dark' ? 'dark' : 'light'
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true)
-  }, [])
+  let resolvedTheme = useResolvedTheme()
+  let mounted = resolvedTheme !== undefined
+  let theme = resolvedTheme ?? 'light'
 
   useEffect(() => {
     if (!mounted) {
       return
     }
 
-    getCalApi({ namespace }).then((cal) => {
+    void getCalApi({ namespace }).then((cal) => {
       cal('ui', {
         theme,
         hideEventTypeDetails: false,

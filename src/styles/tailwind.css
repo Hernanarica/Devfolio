@@ -1,8 +1,4 @@
 @import 'tailwindcss';
-@import './prism.css' layer(components);
-
-@plugin '@tailwindcss/typography';
-@config '../../typography.ts';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -80,5 +76,32 @@
 @keyframes avatar-shrink {
   to {
     transform: translate3d(0.125rem, 0, 0) scale(0.5625);
+  }
+}
+
+/* Barra de progreso de lectura atada al scroll; sin soporte queda oculta */
+.scroll-progress {
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Estado inicial de src/components/Reveal.tsx hasta que src/libs/reveal.ts
+   los anima. Con movimiento reducido el script no corre y quedan visibles */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal],
+  [data-stagger-item] {
+    opacity: 0;
   }
 }

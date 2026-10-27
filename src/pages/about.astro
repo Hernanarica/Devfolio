@@ -1,0 +1,133 @@
+---
+import { Image } from 'astro:assets'
+import clsx from 'clsx'
+import { Mail } from 'lucide-react'
+
+import { Container } from '@/components/Container'
+import { Reveal, Stagger, StaggerItem } from '@/components/Reveal'
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  WhatsAppIcon,
+} from '@/components/SocialIcons'
+import portraitImage from '@/images/portrait.jpg'
+import SiteLayout from '@/layouts/SiteLayout.astro'
+
+const socialLinks = [
+  {
+    href: 'https://github.com/Hernanarica',
+    icon: GitHubIcon,
+    label: 'Seguime en GitHub',
+  },
+  {
+    href: 'https://www.linkedin.com/in/hern%C3%A1n-arica-64ab7b149/',
+    icon: LinkedInIcon,
+    label: 'Conectemos en LinkedIn',
+    className: 'mt-4',
+  },
+  {
+    href: 'https://wa.me/5491139361854',
+    icon: WhatsAppIcon,
+    label: 'Escribime por WhatsApp',
+    className: 'mt-4',
+  },
+]
+---
+
+<SiteLayout
+  title="Sobre mí"
+  description="Soy Hernán, desarrollador Full Stack en Buenos Aires y CTO & Cofounder de Spotter."
+  path="/about"
+>
+  <Container className="mt-16 sm:mt-32">
+    <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+      <div class="lg:pl-20">
+        <Reveal className="max-w-xs px-2.5 lg:max-w-none">
+          <Image
+            src={portraitImage}
+            alt="Hernán"
+            widths={[320, 640, 1024]}
+            sizes="(min-width: 1024px) 32rem, 20rem"
+            class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+          />
+        </Reveal>
+      </div>
+      <Stagger className="lg:order-first lg:row-span-2" stagger={0.1}>
+        <StaggerItem>
+          <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+            Soy Hernán. Construyo productos web de punta a punta desde Buenos
+            Aires.
+          </h1>
+        </StaggerItem>
+        <div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <StaggerItem as="div">
+            <p>
+              Empecé en 2020 en Kickads como desarrollador JavaScript, haciendo
+              piezas interactivas, landings y sitios para campañas digitales.
+              Ahí crecí a Full Stack: mantuve un sistema interno usado por
+              varios equipos e integré APIs de medios como DV360, Meta y Google
+              Ads con un enfoque BFF.
+            </p>
+          </StaggerItem>
+          <StaggerItem as="div">
+            <p>
+              Desde 2023 trabajo en Indigo, donde lideré el desarrollo de una
+              aplicación interna con un equipo de tres personas: definí
+              arquitectura, stack y procesos, optimicé costos de infraestructura
+              en GCP y Supabase, armé ETLs y automatizaciones e implementé
+              Linear desde cero para ordenar el trabajo.
+            </p>
+          </StaggerItem>
+          <StaggerItem as="div">
+            <p>
+              En paralelo trabajo como freelance con clientes como Bezza Pay,
+              Taca Taca y MetaAlign: plataformas de gestión, herramientas
+              internas, sitios y landings. Elijo cada tecnología con criterio,
+              buscando el equilibrio entre lo que el proyecto necesita y una
+              inversión responsable de los recursos. Disfruto especialmente
+              trabajar con datos y automatizar procesos con IA.
+            </p>
+          </StaggerItem>
+          <StaggerItem as="div">
+            <p>
+              Desde julio de 2026 soy CTO & Cofounder de Spotter, una plataforma
+              social de fitness que conecta a personas del mismo gimnasio para
+              que entrenar deje de ser algo que hacés solo. Ahí me enfoco en una
+              arquitectura escalable y sostenible, integrando IA y
+              automatización para que el producto crezca sin volverse una carga
+              operativa. Me formé como desarrollador web en Da Vinci y estoy
+              abierto a proyectos freelance y colaboraciones.
+            </p>
+          </StaggerItem>
+        </div>
+      </Stagger>
+      <Reveal className="lg:pl-20" delay={0.2}>
+        <ul role="list">
+          {socialLinks.map(({ href, icon: Icon, label, className }) => (
+            <li class={clsx(className, 'flex')}>
+              <a
+                href={href}
+                class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+              >
+                <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
+                <span class="ml-4">{label}</span>
+              </a>
+            </li>
+          ))}
+          <li class="mt-8 flex border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
+            <a
+              href="mailto:hernan.arica96@gmail.com"
+              class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+            >
+              <Mail
+                className="h-6 w-6 flex-none stroke-zinc-500 transition group-hover:stroke-teal-500"
+                strokeWidth={1.75}
+              />
+              <span class="ml-4">hernan.arica96@gmail.com</span>
+            </a>
+          </li>
+        </ul>
+      </Reveal>
+    </div>
+  </Container>
+</SiteLayout>

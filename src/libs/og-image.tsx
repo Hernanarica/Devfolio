@@ -1,20 +1,17 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { ImageResponse } from 'next/og'
+import { Resvg } from '@resvg/resvg-js'
+import satori from 'satori'
 
 import { site, siteUrl } from '@/lib/site'
 
-export const alt = site.title
-export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
-
-// Replica el hero del home en modo oscuro. ImageResponse no soporta WOFF2,
-// por eso Inter va en TTF dentro de assets/fonts
+// Replica el hero del home en modo oscuro. Satori no soporta WOFF2, por eso
+// Inter va en TTF dentro de assets/fonts
 function asset(path: string) {
   return readFile(join(process.cwd(), path))
 }
 
-export default async function OpengraphImage() {
+export async function renderOgImage() {
   let [avatar, interRegular, interBold] = await Promise.all([
     asset('src/images/avatar.jpg'),
     asset('assets/fonts/inter-400.ttf'),
@@ -23,11 +20,13 @@ export default async function OpengraphImage() {
   let avatarSrc = `data:image/jpeg;base64,${avatar.toString('base64')}`
   let domain = siteUrl.replace(/^https?:\/\/(www\.)?/, '')
 
-  return new ImageResponse(
+  let svg = await satori(
     <div
       style={{
         width: '100%',
         height: '100%',
+        // Satori usa content-box: sin esto el padding desborda a la derecha
+        boxSizing: 'border-box',
         display: 'flex',
         background: '#000000',
         padding: '0 64px',
@@ -133,11 +132,14 @@ export default async function OpengraphImage() {
       </div>
     </div>,
     {
-      ...size,
+      width: 1200,
+      height: 630,
       fonts: [
         { name: 'Inter', data: interRegular, style: 'normal', weight: 400 },
         { name: 'Inter', data: interBold, style: 'normal', weight: 700 },
       ],
     },
   )
+
+  return new Resvg(svg).render().asPng()
 }

@@ -4,41 +4,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal portfolio built on the Tailwind Plus "Spotlight" template: Next.js 16 (App Router) + React 19 + Tailwind CSS v4 + MDX, written in TypeScript. Content is Hernán Arica's real portfolio, in Spanish (`lang="es"`), sourced from his CV and GitHub profile. Site pages live in the `src/app/(site)/` route group (its layout renders Header/Footer). Routes: `/`, `/about`, `/projects`, `/services` (freelance services, process, quote builder that opens WhatsApp/email, and an inline Cal.com booking embed at `#agendar` via `src/components/BookCall.tsx` — content in `src/components/Services.tsx`; the Cal link lives in `site.links` in `src/lib/site.ts`), `/stack`, `/cv` (ATS-friendly one-column CV outside the site shell, data in `src/lib/resume.ts`, which also feeds the home "Experiencia" card); `/articles` + RSS still exist but are hidden from nav with no articles yet.
+Personal portfolio based on the Tailwind Plus "Spotlight" template, migrated from Next.js to **Astro 7** (static output) + React 19 islands + Tailwind CSS v4, written in TypeScript. Content is Hernán Arica's real portfolio, in Spanish (`lang="es"`), sourced from his CV and GitHub profile. Routes live in `src/pages/`: `/`, `/about`, `/projects`, `/services` (freelance services, process, quote builder that opens WhatsApp/email, and an inline Cal.com booking embed at `#agendar` via `src/components/BookCall.tsx` — content in `src/components/Services.tsx`; the Cal link lives in `site.links` in `src/lib/site.ts`), `/stack`, `/cv` (ATS-friendly one-column CV outside the site shell, data in `src/lib/resume.ts`, which also feeds the home "Experiencia" card), `/404`. There are no articles/RSS (removed in the migration; re-add with content collections + `@astrojs/rss` when needed).
 
-SEO: site constants and `siteUrl` live in `src/lib/site.ts`; pages export `metadata = pageMetadata({ title, description, path })`, which sets canonical + OG/Twitter and must reference `/opengraph-image` explicitly (a page-level `openGraph` drops the file-based image). Root layout adds `metadataBase`, robots and a Person JSON-LD. `src/app/opengraph-image.tsx` renders the share card as a replica of the dark-mode home hero (avatar, freelance badge, headline), using Inter TTFs from `assets/fonts/` (ImageResponse can't read WOFF2); `icon.png`, `apple-icon.png`, `favicon.ico`, `sitemap.ts`, `robots.ts` live in `src/app/`. `siteUrl` uses `NEXT_PUBLIC_SITE_URL`, else Vercel's `NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`, else localhost — OG images need an absolute public URL or link previews show no image.
+Pages are thin `.astro` files that reuse React components (`src/components/*.tsx`). A React component rendered without a `client:*` directive is static HTML with zero JS. Only these hydrate: `Header` (`client:load`, from `src/layouts/SiteLayout.astro`, receives `pathname` and the processed avatar `src` as props), `Services` and `StackShowcase` (`client:load`). `/about` and `/projects` are written directly in `.astro` to use `<Image>` from `astro:assets` (WebP + srcset); `Home` stays in `src/components/Home.tsx`.
 
-Animation: `motion` (motion.dev, import from `motion/react`). Reusable client primitives in `src/components/Motion.tsx` (`Reveal`, `Stagger`/`StaggerItem`, `SpotlightCard`, `ScrollProgress`); they can be used inside server components. `Providers` wraps the app in `MotionConfig reducedMotion="user"`. Smooth scrolling uses Lenis (`src/components/SmoothScroll.tsx`, mounted in `src/app/(site)/layout.tsx`, off with reduced motion); in-page anchors are handled by Lenis and honor `scroll-mt-*`, so don't add an extra offset. The Stack page content lives in the client component `src/components/StackShowcase.tsx` (data + bento grid + logo marquee).
+Layouts: `src/layouts/BaseLayout.astro` (head: meta, canonical, OG/Twitter, robots, theme-color, Person JSON-LD, inline theme script; `head` named slot) and `src/layouts/SiteLayout.astro` (site shell: page background, Safari edge strips, Header, Footer, Lenis, reveal script; title becomes `"<title> - Hernán"`).
 
-Icons: `lucide-react` for all static icons; brand logos via `simple-icons` in `src/components/SocialIcons.tsx` (LinkedIn path is inline — simple-icons dropped it). The theme toggle in `Header.tsx` uses `MorphIcon` from `morphicons/react` fed with icon *data* from the vanilla `lucide` package (keep `lucide` and `lucide-react` versions aligned).
+SEO: `siteUrl` in `src/lib/site.ts` is `import.meta.env.SITE`, the production domain hardcoded as `site` in `astro.config.mjs` — OG images need an absolute public URL. There are no environment variables. Pages pass `title`/`description`/`path` to the layout. The share card is rendered at build time by `src/pages/opengraph-image.png.ts` → `src/libs/og-image.tsx` (satori + resvg, a replica of the dark-mode home hero using Inter TTFs from `assets/fonts/`, since satori can't read WOFF2). `sitemap.xml` and `robots.txt` are endpoints in `src/pages/` (keep the URLs: the sitemap is registered in Search Console). Icons live in `public/`.
+
+Theme: no theme library. An inline blocking script in `BaseLayout` applies the `dark` class on `<html>` before first paint, stores the theme in `localStorage` only when it differs from the OS (otherwise it follows the system), and copies `--edge` (`src/styles/tailwind.css`) into the `theme-color` metas. Islands read/change the theme via `src/libs/theme.ts` (`useResolvedTheme`, `setTheme`); the `<html>` class is the source of truth.
+
+Animation: `motion`. Static pages use `Reveal`/`Stagger`/`StaggerItem` from `src/components/Reveal.tsx` (they only add data attributes) animated by `src/libs/reveal.ts` (vanilla `inView` + `animate`); initial hidden state is in `tailwind.css` under `prefers-reduced-motion: no-preference`. Islands keep using the React versions in `src/components/Motion.tsx` (`Stagger`, `StaggerItem`, `SpotlightCard`) and wrap themselves in `MotionConfig reducedMotion="user"`. The scroll progress bar and the home avatar shrink are CSS scroll-driven animations. Smooth scrolling uses vanilla Lenis in `SiteLayout` (off with reduced motion); in-page anchors are handled by Lenis and honor `scroll-mt-*`, so don't add an extra offset.
+
+Icons: `lucide-react` for all static icons; brand logos via `simple-icons` in `src/components/SocialIcons.tsx` (LinkedIn path is inline — simple-icons dropped it). The theme toggle in `Header.tsx` uses `MorphIcon` from `morphicons/react` fed with icon _data_ from the vanilla `lucide` package (keep `lucide` and `lucide-react` versions aligned).
 
 ## Commands
 
-Dependencies are installed with **pnpm** (`node_modules/.pnpm`, `pnpm-workspace.yaml`); a stale `package-lock.json` from the template also exists — don't mix managers.
+Dependencies are installed with **pnpm** (`pnpm-workspace.yaml`, which also holds the Vite+ `overrides` that alias `vite` to `@voidzero-dev/vite-plus-core` for the whole tree, Astro included); a stale `package-lock.json` from the template also exists — don't mix managers.
 
 ```bash
 pnpm install
-pnpm dev      # dev server at http://localhost:3000
-pnpm build    # production build (also type-checks)
-pnpm start    # serve the production build
-pnpm cv [url] # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:3000/cv)
-pnpm lint     # eslint (eslint-config-next core-web-vitals)
-pnpm exec prettier --write .   # format (single quotes, no semicolons, tailwind class sorting)
+pnpm dev              # astro dev at http://localhost:4321
+pnpm vp run build     # astro build to dist/ (cached by Vite+)
+pnpm preview          # serve the production build (astro preview)
+pnpm cv [url]         # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
+pnpm vp check         # format check (Oxfmt) + lint (Oxlint) + type-check (tsgolint) — run before committing
+pnpm vp check --fix   # same, fixing formatting and fixable lint issues
+pnpm vp lint          # Oxlint only
+pnpm vp fmt           # Oxfmt only (single quotes, no semicolons, width 80, .astro + Tailwind class sorting)
 ```
+
+`pnpm vp …` runs the local Vite+ CLI; with the global CLI installed it's just `vp …`. `build` is a Vite+ task in `run.tasks` (`vite.config.ts`) so it gets cached; `dev`, `preview` and `cv` are plain `package.json` scripts. A task can't share a name with a script, so there is no `build` script.
 
 There is no test suite.
 
-`.env.local` may set `NEXT_PUBLIC_SITE_URL` (see `.env.example`) to override the site URL locally.
-
 ## Architecture
 
-- **Routing**: `src/app/` App Router. `next.config.mjs` adds `mdx` to `pageExtensions`, so `page.mdx` files are routes. MDX is processed with `remark-gfm` and `@mapbox/rehype-prism` (styles in `src/styles/prism.css`). `mdx-components.tsx` exposes `next/image` as `<Image>` inside MDX.
-- **Articles**: each article is `src/app/articles/<slug>/page.mdx` and must `export const article = { author, date, title, description }`, export `metadata`, and default-export a wrapper rendering `<ArticleLayout article={article} {...props} />`. Co-located images are imported directly in the MDX.
-  - `src/lib/articles.ts` (`getAllArticles`) discovers articles by globbing `*/page.mdx` and dynamically importing each to read the `article` export; it powers the home page and `/articles` list (sorted newest first).
-  - `src/app/feed.xml/route.ts` builds the RSS feed differently: it enumerates articles via webpack `require.context`, then **fetches each rendered article page over HTTP** and scrapes it with cheerio (`<article>` → `h1`, `time[datetime]`, `[data-mdx-content]`). Changing `ArticleLayout`/`Prose` markup can break the feed. Feed author info is hardcoded there.
-- **Layout shell**: `src/app/layout.tsx` sets site-wide metadata (title template) and wraps everything in `Providers` → `Layout` (Header + main + Footer). `Providers` holds `next-themes` (class-based dark mode, with a watcher that resets to `system` when the chosen theme matches the OS) and an `AppContext` exposing `previousPathname`, which `ArticleLayout` uses for its "back" button.
-- **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`). Prose/typography customization lives in the root `typography.ts`, loaded via `@config`. Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Section`, `Prose`, etc.).
+- **Config**: `astro.config.mjs` — `site`, `@astrojs/react`, Tailwind via `@tailwindcss/vite`, and the Fonts API (Inter from Google, only used by `/cv` through `<Font slot="head" />`).
+- **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`, `--edge`, scroll-driven animations). Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Button`, etc.); links are plain `<a>`.
 - Path alias `@/*` → `src/*`.
+- **Tooling**: Vite+ (`vite-plus`), configured in `vite.config.ts` — `lint` (Oxlint with `eslint`, `typescript`, `unicorn`, `oxc`, `react` plugins; type-aware + type-check), `fmt` (Oxfmt; `.astro` needs `@astrojs/compiler-rs`), `run.tasks` and `staged` (`vp check --fix` on staged files). Astro does not read `vite.config.ts`. Oxlint only lints `<script>` blocks of `.astro` files and type-check doesn't cover `.astro` templates. `react/purity` is off because components render once at build time.
 
 ## Notes
 

@@ -5,8 +5,6 @@ import {
   type HTMLMotionProps,
   useMotionTemplate,
   useMotionValue,
-  useScroll,
-  useSpring,
   type Variants,
 } from 'motion/react'
 import clsx from 'clsx'
@@ -72,23 +70,6 @@ export function StaggerItem({
     <Component
       variants={revealVariants}
       {...(props as HTMLMotionProps<'div'> & HTMLMotionProps<'li'>)}
-    />
-  )
-}
-
-export function ScrollProgress() {
-  let { scrollYProgress } = useScroll()
-  let scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  })
-
-  return (
-    <motion.div
-      aria-hidden="true"
-      style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-60 h-0.5 origin-left bg-linear-to-r from-teal-400 via-teal-500 to-emerald-400"
     />
   )
 }

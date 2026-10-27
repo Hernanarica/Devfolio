@@ -1,10 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useTheme } from 'next-themes'
+import { useEffect, useRef } from 'react'
 import {
   Popover,
   PopoverButton,
@@ -17,7 +13,7 @@ import { Moon, Sun } from 'lucide'
 import { MorphIcon } from 'morphicons/react'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import { setTheme, type Theme, useResolvedTheme } from '@/libs/theme'
 
 function MobileNavItem({
   href,
@@ -28,7 +24,7 @@ function MobileNavItem({
 }) {
   return (
     <li>
-      <PopoverButton as={Link} href={href} className="block py-2">
+      <PopoverButton as="a" href={href} className="block py-2">
         {children}
       </PopoverButton>
     </li>
@@ -79,16 +75,18 @@ function MobileNavigation(
 
 function NavItem({
   href,
+  pathname,
   children,
 }: {
   href: string
+  pathname: string
   children: React.ReactNode
 }) {
-  let isActive = usePathname() === href
+  let isActive = pathname === href
 
   return (
     <li>
-      <Link
+      <a
         href={href}
         className={clsx(
           'relative block px-3 py-2 whitespace-nowrap transition',
@@ -101,33 +99,39 @@ function NavItem({
         {isActive && (
           <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
         )}
-      </Link>
+      </a>
     </li>
   )
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
+function DesktopNavigation({
+  pathname,
+  ...props
+}: React.ComponentPropsWithoutRef<'nav'> & { pathname: string }) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/about">Sobre mí</NavItem>
-        <NavItem href="/projects">Proyectos</NavItem>
-        <NavItem href="/services">Servicios</NavItem>
-        <NavItem href="/stack">Stack</NavItem>
+        <NavItem href="/about" pathname={pathname}>
+          Sobre mí
+        </NavItem>
+        <NavItem href="/projects" pathname={pathname}>
+          Proyectos
+        </NavItem>
+        <NavItem href="/services" pathname={pathname}>
+          Servicios
+        </NavItem>
+        <NavItem href="/stack" pathname={pathname}>
+          Stack
+        </NavItem>
       </ul>
     </nav>
   )
 }
 
 function ThemeToggle() {
-  let { resolvedTheme, setTheme } = useTheme()
-  let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true)
-  }, [])
+  let resolvedTheme = useResolvedTheme()
+  let mounted = resolvedTheme !== undefined
+  let otherTheme: Theme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
   return (
     <button
@@ -173,35 +177,44 @@ function AvatarContainer({
 }
 
 function Avatar({
+  src,
   large = false,
   className,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
+}: Omit<React.ComponentPropsWithoutRef<'a'>, 'href'> & {
+  src: string
   large?: boolean
 }) {
   return (
-    <Link
+    <a
       href="/"
       aria-label="Inicio"
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
-      <Image
-        src={avatarImage}
+      <img
+        src={src}
         alt=""
-        sizes={large ? '4rem' : '2.25rem'}
+        width={64}
+        height={64}
+        fetchPriority="high"
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
-        priority
       />
-    </Link>
+    </a>
   )
 }
 
-export function Header() {
-  let isHomePage = usePathname() === '/'
+export function Header({
+  pathname,
+  avatarSrc,
+}: {
+  pathname: string
+  avatarSrc: string
+}) {
+  let isHomePage = pathname === '/'
 
   let headerRef = useRef<React.ElementRef<'div'>>(null)
   let avatarRef = useRef<React.ElementRef<'div'>>(null)
@@ -355,6 +368,7 @@ export function Header() {
                     }}
                   />
                   <Avatar
+                    src={avatarSrc}
                     large
                     className="avatar-scroll block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
@@ -383,13 +397,16 @@ export function Header() {
               <div className="flex flex-1">
                 {!isHomePage && (
                   <AvatarContainer>
-                    <Avatar />
+                    <Avatar src={avatarSrc} />
                   </AvatarContainer>
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
                 <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <DesktopNavigation
+                  pathname={pathname}
+                  className="pointer-events-auto hidden md:block"
+                />
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">
