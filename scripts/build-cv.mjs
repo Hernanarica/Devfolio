@@ -1,5 +1,5 @@
 // Exporta la ruta /cv a PDF con Chrome. Requiere el sitio corriendo
-// (vp run build && vp run preview, o vp run dev). Uso: vp run cv [url]
+// (vp run build && pnpm preview, o pnpm dev). Uso: pnpm cv [url]
 import { chromium } from 'playwright-core'
 
 const url = process.argv[2] ?? 'http://localhost:4321/cv'

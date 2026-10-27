@@ -30,7 +30,6 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      dev: { command: 'astro dev', cache: false },
       // El build depende de la URL pública (OG, canonical, sitemap)
       build: {
         command: 'astro build',
@@ -41,9 +40,6 @@ export default defineConfig({
           output: ['dist/**'],
         },
       },
-      preview: { command: 'astro preview', cache: false },
-      // Exporta /cv a PDF; necesita el sitio corriendo (vp run cv [url])
-      cv: { command: 'node scripts/build-cv.mjs', cache: false },
     },
   },
   staged: {

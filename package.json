@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "cv": "node scripts/build-cv.mjs"
+  },
   "dependencies": {
     "@astrojs/react": "^7.1.1",
     "@calcom/embed-react": "1.5.3",

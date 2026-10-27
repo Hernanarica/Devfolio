@@ -19,7 +19,7 @@ PUBLIC_SITE_URL=https://example.com
 Next, run the development server:
 
 ```bash
-pnpm vp run dev
+pnpm dev
 ```
 
 Finally, open [http://localhost:4321](http://localhost:4321) in your browser to view the website.

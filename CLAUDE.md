@@ -24,17 +24,17 @@ Dependencies are installed with **pnpm** (`pnpm-workspace.yaml`, which also hold
 
 ```bash
 pnpm install
-pnpm vp run dev       # astro dev at http://localhost:4321
+pnpm dev              # astro dev at http://localhost:4321
 pnpm vp run build     # astro build to dist/ (cached by Vite+; env PUBLIC_SITE_URL/VERCEL_PROJECT_PRODUCTION_URL are part of the cache key)
-pnpm vp run preview   # serve the production build (astro preview)
-pnpm vp run cv [url]  # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
+pnpm preview          # serve the production build (astro preview)
+pnpm cv [url]         # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
 pnpm vp check         # format check (Oxfmt) + lint (Oxlint) + type-check (tsgolint) — run before committing
 pnpm vp check --fix   # same, fixing formatting and fixable lint issues
 pnpm vp lint          # Oxlint only
 pnpm vp fmt           # Oxfmt only (single quotes, no semicolons, width 80, .astro + Tailwind class sorting)
 ```
 
-`pnpm vp …` runs the local Vite+ CLI; with the global CLI installed it's just `vp …`. There are no `package.json` scripts: tasks live in `run.tasks` in `vite.config.ts` (a task can't share a name with a script).
+`pnpm vp …` runs the local Vite+ CLI; with the global CLI installed it's just `vp …`. `build` is a Vite+ task in `run.tasks` (`vite.config.ts`) so it gets cached; `dev`, `preview` and `cv` are plain `package.json` scripts. A task can't share a name with a script, so there is no `build` script.
 
 There is no test suite.
 
