@@ -7,6 +7,7 @@ import { Stagger, StaggerItem } from '@/components/Motion'
 import imageBezzaPay from '@/images/projects/bezzapay.jpg'
 import imageIndigoHub from '@/images/projects/indigohub.jpg'
 import imageMetaAlign from '@/images/projects/metaalign.jpg'
+import imageMomenrise from '@/images/projects/momenrise.webp'
 import imageOmPersonal from '@/images/projects/ompersonal.jpg'
 import imageSpotterPlatform from '@/images/projects/spotter-platform.jpg'
 import imageSpotterWebsite from '@/images/projects/spotter-website.jpg'
@@ -39,6 +40,18 @@ const projects: Array<Project> = [
     stack: ['Astro', 'Tailwind CSS', 'Supabase'],
     image: imageSpotterWebsite,
     links: [{ href: 'https://www.gospotter.app', label: 'gospotter.app' }],
+  },
+  {
+    name: 'Momenrise',
+    role: 'Creador · Proyecto personal',
+    description:
+      'Web app gratuita de hábitos que se instala en el celular desde el navegador, sin pasar por las tiendas. Registro con un toque, timer o cantidad, frecuencias flexibles, rachas que se pueden pausar, estadísticas, recordatorios push e integración con asistentes de IA vía MCP.',
+    stack: ['Next.js', 'Supabase', 'PWA', 'MCP / IA'],
+    image: imageMomenrise,
+    links: [
+      { href: 'https://app.momenrise.com', label: 'Abrir la app' },
+      { href: 'https://www.momenrise.com', label: 'momenrise.com' },
+    ],
   },
   {
     name: 'MetaAlign',
@@ -115,7 +128,7 @@ export default function Projects() {
   return (
     <SimpleLayout
       title="Productos que construí, de la idea a producción."
-      intro="Una selección de los proyectos más importantes en los que trabajé: mi propio startup, plataformas internas, migraciones a gran escala y sitios para empresas."
+      intro="Una selección de los proyectos más importantes en los que trabajé: mi propio startup, proyectos personales, plataformas internas, migraciones a gran escala y sitios para empresas."
     >
       <Stagger
         as="ul"
