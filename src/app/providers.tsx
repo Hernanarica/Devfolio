@@ -18,6 +18,7 @@ function usePrevious<T>(value: T) {
 
 function ThemeWatcher() {
   let { resolvedTheme, setTheme } = useTheme()
+  let pathname = usePathname()
 
   useEffect(() => {
     let media = window.matchMedia('(prefers-color-scheme: dark)')
@@ -36,6 +37,20 @@ function ThemeWatcher() {
       media.removeEventListener('change', onMediaChange)
     }
   }, [resolvedTheme, setTheme])
+
+  // Los meta theme-color del layout siguen el tema del sistema, no el del
+  // toggle, y Safari pinta sus barras con ellos: sin esto quedan desfasadas
+  // hasta recargar. Depende del pathname porque Next puede volver a montar
+  // los meta al navegar
+  useEffect(() => {
+    if (!resolvedTheme) {
+      return
+    }
+    let color = resolvedTheme === 'dark' ? '#000000' : '#fafafa'
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((meta) => meta.setAttribute('content', color))
+  }, [resolvedTheme, pathname])
 
   return null
 }
