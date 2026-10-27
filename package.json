@@ -2,16 +2,7 @@
   "name": "hernan-arica-portfolio",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "start": "astro preview",
-    "lint": "eslint",
-    "cv": "node scripts/build-cv.mjs",
-    "preview": "astro preview"
-  },
   "type": "module",
-  "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@astrojs/react": "^7.1.1",
     "@calcom/embed-react": "1.5.3",
@@ -33,21 +24,17 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "@astrojs/compiler-rs": "^0.5.2",
     "@types/node": "^24.1.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "eslint": "^9.39.4",
-    "eslint-plugin-astro": "^3.2.1",
-    "eslint-plugin-react-hooks": "^7.1.1",
     "playwright-core": "1.58.2",
-    "prettier": "^3.8.3",
-    "prettier-plugin-astro": "^1.1.2",
-    "prettier-plugin-tailwindcss": "^0.8.1",
     "sharp": "0.34.3",
-    "typescript-eslint": "^8.72.1"
+    "vite-plus": "1.4.0"
   },
   "overrides": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3"
-  }
+  },
+  "browserslist": "defaults, not ie <= 11"
 }

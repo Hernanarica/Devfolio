@@ -4,3 +4,6 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - lucide-react@1.53.0
   - lucide@1.53.0
+# Vite+ pide que todo el árbol use su core de Vite (Astro incluido)
+overrides:
+  vite@*: npm:@voidzero-dev/vite-plus-core@1.4.0

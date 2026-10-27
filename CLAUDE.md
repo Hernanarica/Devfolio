@@ -20,18 +20,21 @@ Icons: `lucide-react` for all static icons; brand logos via `simple-icons` in `s
 
 ## Commands
 
-Dependencies are installed with **pnpm** (`pnpm-workspace.yaml`); a stale `package-lock.json` from the template also exists — don't mix managers.
+Dependencies are installed with **pnpm** (`pnpm-workspace.yaml`, which also holds the Vite+ `overrides` that alias `vite` to `@voidzero-dev/vite-plus-core` for the whole tree, Astro included); a stale `package-lock.json` from the template also exists — don't mix managers.
 
 ```bash
 pnpm install
-pnpm dev      # dev server at http://localhost:4321
-pnpm build    # static build to dist/ (does not type-check)
-pnpm start    # serve the production build (astro preview)
-pnpm cv [url] # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
-pnpm lint     # eslint (typescript-eslint + react-hooks + eslint-plugin-astro)
-pnpm exec tsc --noEmit         # type-check .ts/.tsx (run `pnpm exec astro sync` first)
-pnpm exec prettier --write .   # format (single quotes, no semicolons, astro + tailwind class sorting)
+pnpm vp run dev       # astro dev at http://localhost:4321
+pnpm vp run build     # astro build to dist/ (cached by Vite+; env PUBLIC_SITE_URL/VERCEL_PROJECT_PRODUCTION_URL are part of the cache key)
+pnpm vp run preview   # serve the production build (astro preview)
+pnpm vp run cv [url]  # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
+pnpm vp check         # format check (Oxfmt) + lint (Oxlint) + type-check (tsgolint) — run before committing
+pnpm vp check --fix   # same, fixing formatting and fixable lint issues
+pnpm vp lint          # Oxlint only
+pnpm vp fmt           # Oxfmt only (single quotes, no semicolons, width 80, .astro + Tailwind class sorting)
 ```
+
+`pnpm vp …` runs the local Vite+ CLI; with the global CLI installed it's just `vp …`. There are no `package.json` scripts: tasks live in `run.tasks` in `vite.config.ts` (a task can't share a name with a script).
 
 There is no test suite.
 
@@ -42,7 +45,7 @@ There is no test suite.
 - **Config**: `astro.config.mjs` — `site`, `@astrojs/react`, Tailwind via `@tailwindcss/vite`, and the Fonts API (Inter from Google, only used by `/cv` through `<Font slot="head" />`).
 - **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`, `--edge`, scroll-driven animations). Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Button`, etc.); links are plain `<a>`.
 - Path alias `@/*` → `src/*`.
-- ESLint has `prefer-const` off: the codebase uses `let` by convention.
+- **Tooling**: Vite+ (`vite-plus`), configured in `vite.config.ts` — `lint` (Oxlint with `eslint`, `typescript`, `unicorn`, `oxc`, `react` plugins; type-aware + type-check), `fmt` (Oxfmt; `.astro` needs `@astrojs/compiler-rs`), `run.tasks` and `staged` (`vp check --fix` on staged files). Astro does not read `vite.config.ts`. Oxlint only lints `<script>` blocks of `.astro` files and type-check doesn't cover `.astro` templates. `react/purity` is off because components render once at build time.
 
 ## Notes
 

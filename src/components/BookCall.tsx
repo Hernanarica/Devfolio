@@ -19,7 +19,7 @@ export function BookCall() {
       return
     }
 
-    getCalApi({ namespace }).then((cal) => {
+    void getCalApi({ namespace }).then((cal) => {
       cal('ui', {
         theme,
         hideEventTypeDetails: false,
