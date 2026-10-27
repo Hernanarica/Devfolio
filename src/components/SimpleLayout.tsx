@@ -1,5 +1,5 @@
 import { Container } from '@/components/Container'
-import { Reveal } from '@/components/Motion'
+import { Reveal } from '@/components/Reveal'
 
 export function SimpleLayout({
   title,

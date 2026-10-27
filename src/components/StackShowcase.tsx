@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion, MotionConfig } from 'motion/react'
 import {
   BarChart3,
   Check,
@@ -350,46 +350,52 @@ function CategoryCard({ category }: { category: Category }) {
 }
 
 export function StackShowcase() {
+  // Cada isla es una raíz de React aparte: el MotionConfig va en cada una
   return (
-    <div className="space-y-24">
-      <Marquee />
+    <MotionConfig reducedMotion="user">
+      <div className="space-y-24">
+        <Marquee />
 
-      <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {categories.map((category) => (
-          <CategoryCard key={category.title} category={category} />
-        ))}
-      </Stagger>
-
-      <section>
-        <Stagger>
-          <StaggerItem>
-            <h2 className="flex items-center gap-3 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
-              <Workflow className="h-6 w-6 text-teal-500" strokeWidth={1.75} />
-              Cómo elijo tecnología
-            </h2>
-          </StaggerItem>
-          <Stagger
-            as="ul"
-            role="list"
-            stagger={0.15}
-            className="relative mt-10 grid grid-cols-1 gap-10 md:grid-cols-3"
-          >
-            {principles.map((principle, index) => (
-              <StaggerItem as="li" key={principle.title} className="relative">
-                <span className="text-5xl font-bold tracking-tight text-teal-500/20 dark:text-teal-400/20">
-                  0{index + 1}
-                </span>
-                <h3 className="mt-2 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-                  {principle.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  {principle.description}
-                </p>
-              </StaggerItem>
-            ))}
-          </Stagger>
+        <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category) => (
+            <CategoryCard key={category.title} category={category} />
+          ))}
         </Stagger>
-      </section>
-    </div>
+
+        <section>
+          <Stagger>
+            <StaggerItem>
+              <h2 className="flex items-center gap-3 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
+                <Workflow
+                  className="h-6 w-6 text-teal-500"
+                  strokeWidth={1.75}
+                />
+                Cómo elijo tecnología
+              </h2>
+            </StaggerItem>
+            <Stagger
+              as="ul"
+              role="list"
+              stagger={0.15}
+              className="relative mt-10 grid grid-cols-1 gap-10 md:grid-cols-3"
+            >
+              {principles.map((principle, index) => (
+                <StaggerItem as="li" key={principle.title} className="relative">
+                  <span className="text-5xl font-bold tracking-tight text-teal-500/20 dark:text-teal-400/20">
+                    0{index + 1}
+                  </span>
+                  <h3 className="mt-2 text-base font-semibold text-zinc-800 dark:text-zinc-100">
+                    {principle.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                    {principle.description}
+                  </p>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </Stagger>
+        </section>
+      </div>
+    </MotionConfig>
   )
 }

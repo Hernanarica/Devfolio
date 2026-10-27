@@ -100,3 +100,12 @@
     transform: scaleX(1);
   }
 }
+
+/* Estado inicial de src/components/Reveal.tsx hasta que src/libs/reveal.ts
+   los anima. Con movimiento reducido el script no corre y quedan visibles */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal],
+  [data-stagger-item] {
+    opacity: 0;
+  }
+}

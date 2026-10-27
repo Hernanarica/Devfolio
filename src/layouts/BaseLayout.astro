@@ -10,8 +10,12 @@ interface Props {
   noindex?: boolean
 }
 
-let { title, description = site.description, path, noindex = false } =
-  Astro.props
+let {
+  title,
+  description = site.description,
+  path,
+  noindex = false,
+} = Astro.props
 
 let canonical = new URL(path, siteUrl).href
 let ogImage = `${siteUrl}/opengraph-image.png`
@@ -55,9 +59,9 @@ const personJsonLd = {
     <meta name="keywords" content={site.keywords.join(',')} />
     <meta
       name="robots"
-      content={noindex
-        ? 'noindex, follow'
-        : 'index, follow, max-image-preview:large'}
+      content={
+        noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'
+      }
     />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -74,14 +78,12 @@ const personJsonLd = {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={site.title} />
-    {
-      isHome && (
-        <>
-          <meta property="profile:first_name" content="Hernán" />
-          <meta property="profile:last_name" content="Arica" />
-        </>
-      )
-    }
+    {isHome && (
+      <>
+        <meta property="profile:first_name" content="Hernán" />
+        <meta property="profile:last_name" content="Arica" />
+      </>
+    )}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={site.xHandle} />
     <meta name="twitter:creator" content={site.xHandle} />

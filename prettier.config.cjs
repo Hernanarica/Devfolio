@@ -2,6 +2,7 @@
 module.exports = {
   singleQuote: true,
   semi: false,
-  plugins: ['prettier-plugin-tailwindcss'],
+  // prettier-plugin-tailwindcss tiene que ir último
+  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   tailwindStylesheet: './src/styles/tailwind.css',
 }

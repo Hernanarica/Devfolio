@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -15,7 +14,7 @@ import {
 } from 'lucide-react'
 
 import { Button } from '@/components/Button'
-import { Reveal, Stagger, StaggerItem } from '@/components/Motion'
+import { Reveal, Stagger, StaggerItem } from '@/components/Reveal'
 import { Container } from '@/components/Container'
 import {
   GitHubIcon,
@@ -27,13 +26,13 @@ import { cvPath, type Job, resume } from '@/lib/resume'
 function SocialLink({
   icon: Icon,
   ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & {
+}: React.ComponentPropsWithoutRef<'a'> & {
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
+    <a className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
+    </a>
   )
 }
 
@@ -65,14 +64,14 @@ function Contact() {
           WhatsApp
         </Button>
       </div>
-      <Link
+      <a
         href="/services#agendar"
         className="group mt-4 inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-teal-500 dark:text-zinc-400 dark:hover:text-teal-400"
       >
         <CalendarDays className="h-4 w-4" />
         O agendá una llamada de 30 min
         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-      </Link>
+      </a>
     </div>
   )
 }
@@ -208,13 +207,13 @@ function Resume() {
   )
 }
 
-export default function Home() {
+export function Home() {
   return (
     <>
       <Container className="mt-9">
         <Stagger className="max-w-2xl" stagger={0.12}>
           <StaggerItem>
-            <Link
+            <a
               href="/services"
               className="group mb-6 inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/5 py-1 pr-3 pl-2 text-xs font-medium text-teal-700 transition hover:border-teal-500/40 hover:bg-teal-500/10 dark:text-teal-300"
             >
@@ -224,7 +223,7 @@ export default function Home() {
               </span>
               Disponible para proyectos freelance
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </a>
           </StaggerItem>
           <StaggerItem>
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
