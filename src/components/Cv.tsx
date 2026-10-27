@@ -10,17 +10,13 @@ function displayUrl(url: string) {
   return decodeURIComponent(url.replace(/^https?:\/\/(www\.)?/, ''))
 }
 
-const portfolioUrl = /localhost|example\.com/.test(siteUrl) ? null : siteUrl
-
 const contact = [
   { label: resume.location },
   { label: site.email, href: `mailto:${site.email}` },
   { label: resume.phone, href: site.links.whatsapp },
   { label: displayUrl(site.links.linkedin), href: site.links.linkedin },
   { label: displayUrl(site.links.github), href: site.links.github },
-  ...(portfolioUrl
-    ? [{ label: displayUrl(portfolioUrl), href: portfolioUrl }]
-    : []),
+  { label: displayUrl(siteUrl), href: siteUrl },
 ]
 
 function Section({

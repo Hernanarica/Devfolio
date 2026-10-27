@@ -10,7 +10,7 @@ Pages are thin `.astro` files that reuse React components (`src/components/*.tsx
 
 Layouts: `src/layouts/BaseLayout.astro` (head: meta, canonical, OG/Twitter, robots, theme-color, Person JSON-LD, inline theme script; `head` named slot) and `src/layouts/SiteLayout.astro` (site shell: page background, Safari edge strips, Header, Footer, Lenis, reveal script; title becomes `"<title> - Hernán"`).
 
-SEO: `siteUrl` in `src/lib/site.ts` is `import.meta.env.SITE`, set in `astro.config.mjs` from `PUBLIC_SITE_URL`, else Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, else the production domain — OG images need an absolute public URL. Pages pass `title`/`description`/`path` to the layout. The share card is rendered at build time by `src/pages/opengraph-image.png.ts` → `src/libs/og-image.tsx` (satori + resvg, a replica of the dark-mode home hero using Inter TTFs from `assets/fonts/`, since satori can't read WOFF2). `sitemap.xml` and `robots.txt` are endpoints in `src/pages/` (keep the URLs: the sitemap is registered in Search Console). Icons live in `public/`.
+SEO: `siteUrl` in `src/lib/site.ts` is `import.meta.env.SITE`, the production domain hardcoded as `site` in `astro.config.mjs` — OG images need an absolute public URL. There are no environment variables. Pages pass `title`/`description`/`path` to the layout. The share card is rendered at build time by `src/pages/opengraph-image.png.ts` → `src/libs/og-image.tsx` (satori + resvg, a replica of the dark-mode home hero using Inter TTFs from `assets/fonts/`, since satori can't read WOFF2). `sitemap.xml` and `robots.txt` are endpoints in `src/pages/` (keep the URLs: the sitemap is registered in Search Console). Icons live in `public/`.
 
 Theme: no theme library. An inline blocking script in `BaseLayout` applies the `dark` class on `<html>` before first paint, stores the theme in `localStorage` only when it differs from the OS (otherwise it follows the system), and copies `--edge` (`src/styles/tailwind.css`) into the `theme-color` metas. Islands read/change the theme via `src/libs/theme.ts` (`useResolvedTheme`, `setTheme`); the `<html>` class is the source of truth.
 
@@ -25,7 +25,7 @@ Dependencies are installed with **pnpm** (`pnpm-workspace.yaml`, which also hold
 ```bash
 pnpm install
 pnpm dev              # astro dev at http://localhost:4321
-pnpm vp run build     # astro build to dist/ (cached by Vite+; env PUBLIC_SITE_URL/VERCEL_PROJECT_PRODUCTION_URL are part of the cache key)
+pnpm vp run build     # astro build to dist/ (cached by Vite+)
 pnpm preview          # serve the production build (astro preview)
 pnpm cv [url]         # export /cv to public/hernan-arica-cv.pdf (needs the site running; default http://localhost:4321/cv)
 pnpm vp check         # format check (Oxfmt) + lint (Oxlint) + type-check (tsgolint) — run before committing
@@ -37,8 +37,6 @@ pnpm vp fmt           # Oxfmt only (single quotes, no semicolons, width 80, .ast
 `pnpm vp …` runs the local Vite+ CLI; with the global CLI installed it's just `vp …`. `build` is a Vite+ task in `run.tasks` (`vite.config.ts`) so it gets cached; `dev`, `preview` and `cv` are plain `package.json` scripts. A task can't share a name with a script, so there is no `build` script.
 
 There is no test suite.
-
-`.env.local` may set `PUBLIC_SITE_URL` (see `.env.example`) to override the site URL locally.
 
 ## Architecture
 

@@ -30,12 +30,10 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      // El build depende de la URL pública (OG, canonical, sitemap)
       build: {
         command: 'astro build',
         // .astro/ son tipos que Astro regenera en cada build
         cache: {
-          env: ['PUBLIC_SITE_URL', 'VERCEL_PROJECT_PRODUCTION_URL'],
           input: [{ auto: true }, '!.astro/**', '!dist/**'],
           output: ['dist/**'],
         },

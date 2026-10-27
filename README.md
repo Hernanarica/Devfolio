@@ -10,12 +10,6 @@ To get started with this template, first install the dependencies:
 pnpm install
 ```
 
-Next, create a `.env.local` file in the root of your project and set the `PUBLIC_SITE_URL` variable to your site's public URL:
-
-```
-PUBLIC_SITE_URL=https://example.com
-```
-
 Next, run the development server:
 
 ```bash
