@@ -39,9 +39,9 @@ function ThemeWatcher() {
   }, [resolvedTheme, setTheme])
 
   // Los meta theme-color del layout siguen el tema del sistema, no el del
-  // toggle, y Safari pinta sus barras con ellos: sin esto quedan desfasadas
-  // hasta recargar. Depende del pathname porque Next puede volver a montar
-  // los meta al navegar
+  // toggle, y Chrome en Android pinta su barra con ellos: sin esto queda
+  // desfasada hasta recargar (Safari 26 los ignora, ver PageBackground).
+  // Depende del pathname porque Next puede volver a montar los meta al navegar
   useEffect(() => {
     if (!resolvedTheme) {
       return
