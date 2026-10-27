@@ -24,5 +24,11 @@ export default defineConfig({
       styles: ['normal', 'italic'],
     },
   ],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    // resvg es un binario nativo (.node) que solo usa la imagen OG en el
+    // server: el optimizador de deps de dev no puede empaquetarlo
+    optimizeDeps: { exclude: ['@resvg/resvg-js'] },
+    ssr: { external: ['@resvg/resvg-js'] },
+  },
 })
