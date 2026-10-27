@@ -17,15 +17,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Footer />
       </div>
       {/* Safari 26 tiñe sus barras con el background-color del elemento fijo
-          que toca cada borde (lo lee al 100% aunque tenga opacity) y lo
-          actualiza en vivo; estas tiras le dan el color de la columna */}
+          que toca cada borde (opaco, de al menos 3px y casi todo el ancho; si
+          tiene opacity lo ignora). En mobile le dan el color de la columna; en
+          desktop no hacen falta: cae al body, que es el color de los costados */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 z-2147483647 h-3 bg-white opacity-12 dark:bg-zinc-900"
+        className="pointer-events-none fixed inset-x-0 top-0 z-40 h-1 bg-white sm:hidden dark:bg-zinc-900"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-2147483647 h-3 bg-white opacity-12 dark:bg-zinc-900"
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-1 bg-white sm:hidden dark:bg-zinc-900"
       />
     </>
   )
