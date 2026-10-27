@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { ContainerInner, ContainerOuter } from '@/components/Container'
 
 function NavLink({
@@ -10,12 +8,12 @@ function NavLink({
   children: React.ReactNode
 }) {
   return (
-    <Link
+    <a
       href={href}
       className="transition hover:text-teal-500 dark:hover:text-teal-400"
     >
       {children}
-    </Link>
+    </a>
   )
 }
 

@@ -82,3 +82,21 @@
     transform: translate3d(0.125rem, 0, 0) scale(0.5625);
   }
 }
+
+/* Barra de progreso de lectura atada al scroll; sin soporte queda oculta */
+.scroll-progress {
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress {
+  to {
+    transform: scaleX(1);
+  }
+}

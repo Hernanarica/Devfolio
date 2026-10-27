@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import clsx from 'clsx'
 
 const variantStyles = {
@@ -12,7 +11,7 @@ type ButtonProps = {
   variant?: keyof typeof variantStyles
 } & (
   | (React.ComponentPropsWithoutRef<'button'> & { href?: undefined })
-  | React.ComponentPropsWithoutRef<typeof Link>
+  | (React.ComponentPropsWithoutRef<'a'> & { href: string })
 )
 
 export function Button({
@@ -29,6 +28,6 @@ export function Button({
   return typeof props.href === 'undefined' ? (
     <button className={className} {...props} />
   ) : (
-    <Link className={className} {...props} />
+    <a className={className} {...props} />
   )
 }

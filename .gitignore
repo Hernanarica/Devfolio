@@ -36,3 +36,7 @@ next-env.d.ts
 
 # Windows download metadata (WSL)
 *:Zone.Identifier
+
+# astro
+/dist/
+/.astro/
