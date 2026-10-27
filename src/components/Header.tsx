@@ -265,6 +265,16 @@ export function Header() {
         return
       }
 
+      // Con scroll-driven animations el CSS (.avatar-scroll) anima la imagen;
+      // el borde es invisible hasta el final, así que solo hace falta mostrarlo
+      if (CSS.supports('animation-timeline: scroll()')) {
+        setProperty(
+          '--avatar-border-opacity',
+          window.scrollY >= downDelay ? '1' : '0',
+        )
+        return
+      }
+
       let fromScale = 1
       let toScale = 36 / 64
       let fromX = 0
@@ -346,7 +356,7 @@ export function Header() {
                   />
                   <Avatar
                     large
-                    className="block h-16 w-16 origin-left"
+                    className="avatar-scroll block h-16 w-16 origin-left"
                     style={{ transform: 'var(--avatar-image-transform)' }}
                   />
                 </div>

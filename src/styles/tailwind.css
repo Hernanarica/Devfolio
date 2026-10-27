@@ -45,3 +45,21 @@
     background: white;
   }
 }
+
+/* El achique del avatar del home va atado al scroll en CSS para que lo anime
+   el compositor: con el handler de scroll en JS, iOS Safari lo dibujaba un
+   frame tarde y se veía a saltos. 7.25rem es el fallback de --content-offset
+   (distancia de scroll que dura la animación) antes de que lo setee el JS */
+@supports (animation-timeline: scroll()) {
+  .avatar-scroll {
+    animation: avatar-shrink linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 var(--content-offset, 7.25rem);
+  }
+}
+
+@keyframes avatar-shrink {
+  to {
+    transform: translate3d(0.125rem, 0, 0) scale(0.5625);
+  }
+}
