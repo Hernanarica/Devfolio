@@ -23,7 +23,8 @@ export function Stagger({
     <Component
       data-stagger={stagger}
       data-delay={delay}
-      {...(props as React.ComponentPropsWithoutRef<'ul'>)}
+      {...(props as React.ComponentPropsWithoutRef<'div'> &
+        React.ComponentPropsWithoutRef<'ul'>)}
     />
   )
 }
@@ -35,7 +36,8 @@ export function StaggerItem({
   return (
     <Component
       data-stagger-item=""
-      {...(props as React.ComponentPropsWithoutRef<'li'>)}
+      {...(props as React.ComponentPropsWithoutRef<'div'> &
+        React.ComponentPropsWithoutRef<'li'>)}
     />
   )
 }

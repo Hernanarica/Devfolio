@@ -1,28 +1,28 @@
 # Spotlight
 
-Spotlight is a [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+Spotlight is a [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com), originally on Next.js and now running on [Astro](https://astro.build).
 
 ## Getting started
 
-To get started with this template, first install the npm dependencies:
+To get started with this template, first install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
+Next, create a `.env.local` file in the root of your project and set the `PUBLIC_SITE_URL` variable to your site's public URL:
 
 ```
-NEXT_PUBLIC_SITE_URL=https://example.com
+PUBLIC_SITE_URL=https://example.com
 ```
 
 Next, run the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+Finally, open [http://localhost:4321](http://localhost:4321) in your browser to view the website.
 
 ## Customizing
 
@@ -37,6 +37,5 @@ This site template is a commercial product and is licensed under the [Tailwind P
 To learn more about the technologies used in this site template, see the following resources:
 
 - [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
+- [Astro](https://docs.astro.build) - the official Astro documentation
 - [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [MDX](https://mdxjs.com) - the MDX documentation

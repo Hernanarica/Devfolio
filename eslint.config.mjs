@@ -1,21 +1,13 @@
-import nextVitals from 'eslint-config-next/core-web-vitals'
+import eslintPluginAstro from 'eslint-plugin-astro'
+import reactHooks from 'eslint-plugin-react-hooks'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-  ]),
-  {
-    rules: {
-      '@next/next/no-img-element': 'off',
-    },
-  },
+export default defineConfig([
+  globalIgnores(['dist/', '.astro/', '.vercel/']),
+  tseslint.configs.recommended,
+  reactHooks.configs.flat.recommended,
+  eslintPluginAstro.configs.recommended,
+  // El proyecto usa `let` por convención (heredada del template Spotlight)
+  { rules: { 'prefer-const': 'off' } },
 ])
-
-export default eslintConfig

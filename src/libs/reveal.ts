@@ -3,7 +3,7 @@ import { animate, inView, stagger } from 'motion'
 // Mismo efecto que los variants de src/components/Motion.tsx
 const keyframes = { opacity: [0, 1], y: [24, 0] }
 const options = { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] as const }
-const viewport = { margin: '0px 0px -80px 0px' }
+const viewport = { margin: '0px 0px -80px 0px' } as const
 
 export function revealOnScroll() {
   inView(
