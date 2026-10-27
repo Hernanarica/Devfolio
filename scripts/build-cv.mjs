@@ -2,7 +2,7 @@
 // (pnpm build && pnpm start, o pnpm dev). Uso: pnpm cv [url]
 import { chromium } from 'playwright-core'
 
-const url = process.argv[2] ?? 'http://localhost:3000/cv'
+const url = process.argv[2] ?? 'http://localhost:4321/cv'
 const output = new URL('../public/hernan-arica-cv.pdf', import.meta.url)
 
 const browser = await chromium.launch({ channel: 'chrome' })

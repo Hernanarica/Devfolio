@@ -1,0 +1,18 @@
+---
+import { Font } from 'astro:assets'
+
+import { Cv } from '@/components/Cv'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { resume } from '@/lib/resume'
+import { site } from '@/lib/site'
+---
+
+<BaseLayout
+  title={`${site.fullName} - CV Full Stack Developer`}
+  description={`Currículum de ${site.fullName}, ${resume.headline}.`}
+  path="/cv"
+  noindex
+>
+  <Font slot="head" cssVariable="--font-inter" preload />
+  <Cv />
+</BaseLayout>

@@ -1,17 +1,7 @@
-import { type Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { Download } from 'lucide-react'
 
 import { cvPath, type Job, resume } from '@/lib/resume'
 import { site, siteUrl } from '@/lib/site'
-
-const inter = Inter({ subsets: ['latin'], display: 'swap' })
-
-export const metadata: Metadata = {
-  title: { absolute: `${site.fullName} - CV Full Stack Developer` },
-  description: `Currículum de ${site.fullName}, ${resume.headline}.`,
-  robots: { index: false, follow: true },
-}
 
 // Diseño pensado para ATS: una sola columna, texto real, sin tablas,
 // íconos ni imágenes. Se exporta a PDF con `pnpm cv`.
@@ -83,11 +73,9 @@ function JobEntry({ job }: { job: Job }) {
   )
 }
 
-export default function CvPage() {
+export function Cv() {
   return (
-    <div
-      className={`${inter.className} min-h-full w-full bg-zinc-100 py-10 print:bg-white print:py-0`}
-    >
+    <div className="min-h-full w-full bg-zinc-100 py-10 font-(family-name:--font-inter) print:bg-white print:py-0">
       <div className="mx-auto mb-4 flex max-w-[210mm] justify-end px-4 print:hidden">
         <a
           href={cvPath}
