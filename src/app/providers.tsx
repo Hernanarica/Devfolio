@@ -39,17 +39,29 @@ function ThemeWatcher() {
   }, [resolvedTheme, setTheme])
 
   // Los meta theme-color del layout siguen el tema del sistema, no el del
-  // toggle, y Chrome en Android pinta su barra con ellos: sin esto queda
-  // desfasada hasta recargar (Safari 26 los ignora, ver las tiras de Layout).
-  // Depende del pathname porque Next puede volver a montar los meta al navegar
+  // toggle: se copian de --edge (tailwind.css) al cambiar el tema o el ancho.
+  // Se lee en el próximo frame porque next-themes cambia la clase del <html>
+  // en un efecto del provider, que corre después de este. Depende del
+  // pathname porque Next puede volver a montar los meta al navegar
   useEffect(() => {
-    if (!resolvedTheme) {
-      return
+    let wide = window.matchMedia('(min-width: 40rem)')
+
+    function syncThemeColor() {
+      let color = getComputedStyle(document.documentElement)
+        .getPropertyValue('--edge')
+        .trim()
+      document
+        .querySelectorAll('meta[name="theme-color"]')
+        .forEach((meta) => meta.setAttribute('content', color))
     }
-    let color = resolvedTheme === 'dark' ? '#18181b' : '#ffffff'
-    document
-      .querySelectorAll('meta[name="theme-color"]')
-      .forEach((meta) => meta.setAttribute('content', color))
+
+    let frame = requestAnimationFrame(syncThemeColor)
+    wide.addEventListener('change', syncThemeColor)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      wide.removeEventListener('change', syncThemeColor)
+    }
   }, [resolvedTheme, pathname])
 
   return null

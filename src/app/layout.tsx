@@ -85,7 +85,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="h-full antialiased" suppressHydrationWarning>
-      <body className="flex h-full bg-white sm:bg-zinc-50 dark:bg-zinc-900 sm:dark:bg-black">
+      <body className="flex h-full bg-(--edge)">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

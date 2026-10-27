@@ -35,6 +35,25 @@
   --text-9xl--line-height: 1;
 }
 
+/* Color que se ve en los bordes de la página: la columna en pantallas
+   angostas (ocupa todo el ancho) y los costados en anchas. De acá salen el
+   fondo del body, las tiras de borde y theme-color, para que cada navegador
+   tiña su interfaz igual que la página */
+:root {
+  --edge: #ffffff;
+}
+:root.dark {
+  --edge: #18181b;
+}
+@media (min-width: 40rem) {
+  :root {
+    --edge: #fafafa;
+  }
+  :root.dark {
+    --edge: #000000;
+  }
+}
+
 @page {
   size: A4;
   margin: 12mm 14mm;
