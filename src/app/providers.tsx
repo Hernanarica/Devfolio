@@ -40,13 +40,13 @@ function ThemeWatcher() {
 
   // Los meta theme-color del layout siguen el tema del sistema, no el del
   // toggle, y Chrome en Android pinta su barra con ellos: sin esto queda
-  // desfasada hasta recargar (Safari 26 los ignora, ver PageBackground).
+  // desfasada hasta recargar (Safari 26 los ignora, ver las tiras de Layout).
   // Depende del pathname porque Next puede volver a montar los meta al navegar
   useEffect(() => {
     if (!resolvedTheme) {
       return
     }
-    let color = resolvedTheme === 'dark' ? '#000000' : '#fafafa'
+    let color = resolvedTheme === 'dark' ? '#18181b' : '#ffffff'
     document
       .querySelectorAll('meta[name="theme-color"]')
       .forEach((meta) => meta.setAttribute('content', color))
