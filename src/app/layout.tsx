@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'profile',
     locale: site.locale,
-    siteName: site.name,
+    siteName: site.fullName,
     url: '/',
     title: site.title,
     description: site.description,
@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: site.xHandle,
+    creator: site.xHandle,
     title: site.title,
     description: site.description,
   },
@@ -73,7 +75,7 @@ const personJsonLd = {
   },
   alumniOf: { '@type': 'EducationalOrganization', name: 'Escuela Da Vinci' },
   knowsAbout: site.keywords.slice(4),
-  sameAs: [site.links.github, site.links.linkedin],
+  sameAs: [site.links.github, site.links.linkedin, site.links.x],
 }
 
 export default function RootLayout({
