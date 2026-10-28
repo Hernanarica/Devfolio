@@ -75,6 +75,7 @@ export function Cv() {
       <div className="mx-auto mb-4 flex max-w-[210mm] justify-end px-4 print:hidden">
         <a
           href={cvPath}
+          target="_blank"
           className="inline-flex items-center gap-2 rounded-full bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-100 transition hover:bg-zinc-700"
         >
           <Download className="h-4 w-4" />
@@ -99,7 +100,15 @@ export function Cv() {
                   className="my-[3.75px] border-l border-zinc-300 px-1.5 leading-none whitespace-nowrap"
                 >
                   {item.href ? (
-                    <a href={item.href} className="hover:text-teal-700">
+                    <a
+                      href={item.href}
+                      // mailto no abre pestaña; el resto sí
+                      target={
+                        item.href.startsWith('http') ? '_blank' : undefined
+                      }
+                      rel="noopener noreferrer"
+                      className="hover:text-teal-700"
+                    >
                       {item.label}
                     </a>
                   ) : (
