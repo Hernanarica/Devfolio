@@ -26,7 +26,7 @@ import clsx from 'clsx'
 
 import { BookCall } from '@/components/BookCall'
 import { SpotlightCard, Stagger, StaggerItem } from '@/components/Motion'
-import { site } from '@/lib/site'
+import { buildQuoteLinks } from '@/libs/quote'
 
 interface Service {
   title: string
@@ -299,18 +299,12 @@ function QuoteForm() {
   let [budget, setBudget] = useState(budgetOptions[0])
   let [details, setDetails] = useState('')
 
-  let message = [
-    `¡Hola Hernán! ${name ? `Soy ${name}. ` : ''}Quiero pedir una cotización.`,
-    '',
-    `• Servicio: ${service}`,
-    `• Presupuesto aproximado: ${budget}`,
-    ...(details ? [`• Detalle: ${details}`] : []),
-  ].join('\n')
-
-  let whatsappHref = `${site.links.whatsapp}?text=${encodeURIComponent(message)}`
-  let mailHref = `mailto:${site.email}?subject=${encodeURIComponent(
-    `Cotización: ${service}`,
-  )}&body=${encodeURIComponent(message)}`
+  let { whatsappHref, mailHref } = buildQuoteLinks({
+    name,
+    service,
+    budget,
+    details,
+  })
 
   let controlClassName =
     'mt-2 block w-full border-0 border-b border-zinc-200 bg-transparent px-0 py-2 text-sm text-zinc-800 transition-colors placeholder:text-zinc-400 focus:border-teal-500 focus:ring-0 focus:outline-none dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-teal-400'

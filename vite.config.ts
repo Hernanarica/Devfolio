@@ -3,6 +3,8 @@ import { defineConfig } from 'vite-plus'
 // Config de Vite+ para lint, formato, chequeo de tipos, tareas y hooks.
 // Astro no lee este archivo: dev y build siguen en astro.config.mjs
 export default defineConfig({
+  // Para vp test: el alias @/* sale del tsconfig, como en Astro
+  resolve: { tsconfigPaths: true },
   lint: {
     plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'react'],
     ignorePatterns: ['dist/**', '.astro/**'],
@@ -45,5 +47,6 @@ export default defineConfig({
     // vp check no entra a los templates .astro; astro check revisa el
     // proyecto entero, por eso no recibe la lista de archivos
     '*.{astro,ts,tsx}': () => 'astro check',
+    '*.{ts,tsx}': () => 'vp test run',
   },
 })
