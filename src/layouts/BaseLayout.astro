@@ -17,7 +17,8 @@ let {
   noindex = false,
 } = Astro.props
 
-let canonical = new URL(path, siteUrl).href
+// Sin barra final, igual que las demás URLs del sitio
+let canonical = new URL(path, siteUrl).href.replace(/\/$/, '')
 let ogImage = `${siteUrl}/opengraph-image.png`
 let isHome = path === '/'
 
@@ -55,14 +56,16 @@ const personJsonLd = {
     <meta name="description" content={description} />
     <meta name="application-name" content={site.name} />
     <meta name="author" content={site.fullName} />
+    <link rel="author" href={siteUrl} />
     <meta name="creator" content={site.fullName} />
     <meta name="keywords" content={site.keywords.join(',')} />
     <meta
       name="robots"
-      content={
-        noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'
-      }
+      content={noindex ? 'noindex, follow' : 'index, follow'}
     />
+    {!noindex && (
+      <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    )}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/icon.png" type="image/png" />
@@ -78,6 +81,7 @@ const personJsonLd = {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={site.title} />
+    <meta property="og:image:type" content="image/png" />
     {isHome && (
       <>
         <meta property="profile:first_name" content="Hernán" />
@@ -90,6 +94,10 @@ const personJsonLd = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
+    <meta name="twitter:image:alt" content={site.title} />
+    <meta name="twitter:image:type" content="image/png" />
 
     <meta
       name="theme-color"

@@ -4,7 +4,14 @@ import { Container } from '@/components/Container'
 import SiteLayout from '@/layouts/SiteLayout.astro'
 ---
 
-<SiteLayout title="Página no encontrada" path="/404" noindex>
+<!-- Sin Lenis: su CSS pone height:auto en <html> y la página dejaría de
+     ocupar toda la pantalla (el contenido no quedaría centrado) -->
+<SiteLayout
+  title="Página no encontrada"
+  path="/404"
+  noindex
+  smoothScroll={false}
+>
   <Container className="flex h-full items-center pt-16 sm:pt-32">
     <div class="flex flex-col items-center">
       <p class="text-base font-semibold text-zinc-400 dark:text-zinc-500">

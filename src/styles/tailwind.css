@@ -64,10 +64,14 @@
 /* El achique del avatar del home va atado al scroll en CSS para que lo anime
    el compositor: con el handler de scroll en JS, iOS Safari lo dibujaba un
    frame tarde y se veía a saltos. 7.25rem es el fallback de --content-offset
-   (distancia de scroll que dura la animación) antes de que lo setee el JS */
+   (distancia de scroll que dura la animación) antes de que lo setee el JS.
+   Van longhands a propósito: el minificador (lightningcss) junta `animation`
+   + `animation-timeline` en un solo shorthand que los navegadores rechazan */
 @supports (animation-timeline: scroll()) {
   .avatar-scroll {
-    animation: avatar-shrink linear both;
+    animation-name: avatar-shrink;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: scroll(root);
     animation-range: 0 var(--content-offset, 7.25rem);
   }
@@ -86,7 +90,10 @@
 
 @supports (animation-timeline: scroll()) {
   .scroll-progress {
-    animation: scroll-progress linear both;
+    /* Longhands por lo mismo que .avatar-scroll */
+    animation-name: scroll-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: scroll(root);
   }
 }

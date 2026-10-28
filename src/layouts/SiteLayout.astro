@@ -12,9 +12,10 @@ interface Props {
   description?: string
   path: string
   noindex?: boolean
+  smoothScroll?: boolean
 }
 
-let { title, description, path, noindex } = Astro.props
+let { title, description, path, noindex, smoothScroll = true } = Astro.props
 
 let avatar = await getImage({ src: avatarImage, width: 128, format: 'webp' })
 let pathname = Astro.url.pathname.replace(/(.)\/$/, '$1')
@@ -26,7 +27,7 @@ let pathname = Astro.url.pathname.replace(/(.)\/$/, '$1')
   path={path}
   noindex={noindex}
 >
-  <div class="flex w-full">
+  <div class="flex w-full" data-smooth-scroll={smoothScroll || undefined}>
     <div
       aria-hidden="true"
       class="scroll-progress fixed inset-x-0 top-0 z-60 h-0.5 origin-left bg-linear-to-r from-teal-400 via-teal-500 to-emerald-400"
@@ -65,7 +66,9 @@ let pathname = Astro.url.pathname.replace(/(.)\/$/, '$1')
   import 'lenis/dist/lenis.css'
 
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    new Lenis({ autoRaf: true, lerp: 0.1, anchors: true })
+    if (document.querySelector('[data-smooth-scroll]')) {
+      new Lenis({ autoRaf: true, lerp: 0.1, anchors: true })
+    }
     revealOnScroll()
   }
 </script>
