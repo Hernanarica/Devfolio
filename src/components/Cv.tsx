@@ -89,15 +89,15 @@ export function Cv() {
           <p className="mt-1 text-[15px] font-medium text-teal-700">
             {resume.headline}
           </p>
-          <p className="mt-3 text-[12px] leading-relaxed text-zinc-600">
-            {contact.map((item, index) => (
-              <span key={item.label}>
-                {index > 0 && (
-                  <span aria-hidden="true" className="mx-1.5 text-zinc-300">
-                    |
-                  </span>
-                )}
-                <span className="whitespace-nowrap">
+          {/* Los separadores son bordes y no "|": al hacer wrap, el
+              overflow-hidden recorta el del primer ítem de cada renglón */}
+          <div className="mt-3 overflow-hidden">
+            <p className="-ml-[7px] flex flex-wrap text-[12px] text-zinc-600">
+              {contact.map((item) => (
+                <span
+                  key={item.label}
+                  className="my-[3.75px] border-l border-zinc-300 px-1.5 leading-none whitespace-nowrap"
+                >
                   {item.href ? (
                     <a href={item.href} className="hover:text-teal-700">
                       {item.label}
@@ -106,9 +106,9 @@ export function Cv() {
                     item.label
                   )}
                 </span>
-              </span>
-            ))}
-          </p>
+              ))}
+            </p>
+          </div>
         </header>
 
         <Section title="Perfil profesional">
