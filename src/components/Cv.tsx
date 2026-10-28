@@ -2,6 +2,7 @@ import { Download } from 'lucide-react'
 
 import { cvPath, type Job, resume } from '@/lib/resume'
 import { site, siteUrl } from '@/lib/site'
+import { externalLinkProps } from '@/libs/links'
 
 // Diseño pensado para ATS: una sola columna, texto real, sin tablas,
 // íconos ni imágenes. Se exporta a PDF con `pnpm cv`.
@@ -102,11 +103,7 @@ export function Cv() {
                   {item.href ? (
                     <a
                       href={item.href}
-                      // mailto no abre pestaña; el resto sí
-                      target={
-                        item.href.startsWith('http') ? '_blank' : undefined
-                      }
-                      rel="noopener noreferrer"
+                      {...externalLinkProps(item.href)}
                       className="hover:text-teal-700"
                     >
                       {item.label}

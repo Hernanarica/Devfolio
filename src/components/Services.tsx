@@ -27,6 +27,7 @@ import clsx from 'clsx'
 import { BookCall } from '@/components/BookCall'
 import { SpotlightCard, Stagger, StaggerItem } from '@/components/Motion'
 import { buildQuoteLinks } from '@/libs/quote'
+import { externalLinkProps } from '@/libs/links'
 
 interface Service {
   title: string
@@ -390,6 +391,7 @@ function QuoteForm() {
           </motion.a>
           <motion.a
             href={mailHref}
+            {...externalLinkProps(mailHref)}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-zinc-700 ring-1 ring-zinc-200 transition-colors hover:ring-zinc-300 dark:text-zinc-200 dark:ring-zinc-700 dark:hover:ring-zinc-600"

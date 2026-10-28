@@ -43,7 +43,7 @@ Tests use Vitest through Vite+ (`pnpm vp test`, files `*.test.ts` next to the co
 ## Architecture
 
 - **Config**: `astro.config.mjs` — `site`, `@astrojs/react`, Tailwind via `@tailwindcss/vite`, and the Fonts API (Inter from Google, only used by `/cv` through `<Font slot="head" />`).
-- **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`, `--edge`, scroll-driven animations). Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Button`, etc.); links are plain `<a>`.
+- **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`, `--edge`, scroll-driven animations). Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Button`, etc.); links are plain `<a>`. Every link that leaves the site (`http(s):` and `mailto:`) opens in a new tab: spread `externalLinkProps(href)` from `src/libs/links.ts` (`Button` already does it); internal links never do.
 - Path alias `@/*` → `src/*`.
 - **Tooling**: Vite+ (`vite-plus`), configured in `vite.config.ts` — `lint` (Oxlint with `eslint`, `typescript`, `unicorn`, `oxc`, `react` plugins; type-aware + type-check), `fmt` (Oxfmt; `.astro` needs `@astrojs/compiler-rs`), `run.tasks` and `staged` (`vp check --fix` on staged files). Astro does not read `vite.config.ts`. Oxlint only lints `<script>` blocks of `.astro` files and its type-check doesn't cover `.astro` templates: `astro check` (`@astrojs/check`) does, and `staged` runs it too. `react/purity` is off because components render once at build time.
 
