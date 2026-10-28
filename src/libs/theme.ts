@@ -1,27 +1,19 @@
-import { useSyncExternalStore } from 'react'
-
 export type Theme = 'light' | 'dark'
 
 // El script inline de BaseLayout aplica el tema y la clase `dark` del <html>
-// es la fuente de verdad: cada isla la observa en vez de compartir un store
-function subscribe(onChange: () => void) {
+// es la fuente de verdad: quien lo necesite la observa en vez de compartir un
+// store. Sin React acá, para que el script del Header no lo cargue
+export function getResolvedTheme(): Theme {
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+}
+
+export function subscribeTheme(onChange: () => void) {
   let observer = new MutationObserver(onChange)
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['class'],
   })
   return () => observer.disconnect()
-}
-
-// En el server y durante la hidratación devuelve undefined, para que el HTML
-// coincida antes de conocer el tema real
-export function useResolvedTheme() {
-  return useSyncExternalStore<Theme | undefined>(
-    subscribe,
-    () =>
-      document.documentElement.classList.contains('dark') ? 'dark' : 'light',
-    () => undefined,
-  )
 }
 
 export function setTheme(theme: Theme) {

@@ -2,7 +2,7 @@
 import { getImage } from 'astro:assets'
 
 import { Footer } from '@/components/Footer'
-import { Header } from '@/components/Header'
+import Header from '@/components/Header.astro'
 import avatarImage from '@/images/avatar.jpg'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { site } from '@/lib/site'
@@ -38,7 +38,7 @@ let pathname = Astro.url.pathname.replace(/(.)\/$/, '$1')
       </div>
     </div>
     <div class="relative flex w-full flex-col">
-      <Header client:load pathname={pathname} avatarSrc={avatar.src} />
+      <Header pathname={pathname} avatarSrc={avatar.src} />
       <main class="flex-auto">
         <slot />
       </main>

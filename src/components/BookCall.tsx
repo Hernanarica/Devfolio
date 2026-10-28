@@ -5,7 +5,7 @@ import Cal, { getCalApi } from '@calcom/embed-react'
 import { CalendarDays } from 'lucide-react'
 
 import { site } from '@/lib/site'
-import { useResolvedTheme } from '@/libs/theme'
+import { useResolvedTheme } from '@/libs/useResolvedTheme'
 
 const namespace = 'llamada-inicial'
 
