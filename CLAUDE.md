@@ -31,6 +31,7 @@ pnpm cv [url]         # export /cv to public/hernan-arica-cv.pdf (needs the site
 pnpm vp check         # format check (Oxfmt) + lint (Oxlint) + type-check (tsgolint) — run before committing
 pnpm vp check --fix   # same, fixing formatting and fixable lint issues
 pnpm vp lint          # Oxlint only
+pnpm check:astro      # astro check: types inside .astro templates (vp check doesn't cover them)
 pnpm vp fmt           # Oxfmt only (single quotes, no semicolons, width 80, .astro + Tailwind class sorting)
 ```
 
@@ -43,7 +44,7 @@ There is no test suite.
 - **Config**: `astro.config.mjs` — `site`, `@astrojs/react`, Tailwind via `@tailwindcss/vite`, and the Fonts API (Inter from Google, only used by `/cv` through `<Font slot="head" />`).
 - **Styling**: Tailwind v4 configured in CSS (`src/styles/tailwind.css`: `@theme` font-size scale, `dark` custom variant on `.dark`, `--edge`, scroll-driven animations). Shared UI primitives are in `src/components/` (`Container`, `Card`, `SimpleLayout`, `Button`, etc.); links are plain `<a>`.
 - Path alias `@/*` → `src/*`.
-- **Tooling**: Vite+ (`vite-plus`), configured in `vite.config.ts` — `lint` (Oxlint with `eslint`, `typescript`, `unicorn`, `oxc`, `react` plugins; type-aware + type-check), `fmt` (Oxfmt; `.astro` needs `@astrojs/compiler-rs`), `run.tasks` and `staged` (`vp check --fix` on staged files). Astro does not read `vite.config.ts`. Oxlint only lints `<script>` blocks of `.astro` files and type-check doesn't cover `.astro` templates. `react/purity` is off because components render once at build time.
+- **Tooling**: Vite+ (`vite-plus`), configured in `vite.config.ts` — `lint` (Oxlint with `eslint`, `typescript`, `unicorn`, `oxc`, `react` plugins; type-aware + type-check), `fmt` (Oxfmt; `.astro` needs `@astrojs/compiler-rs`), `run.tasks` and `staged` (`vp check --fix` on staged files). Astro does not read `vite.config.ts`. Oxlint only lints `<script>` blocks of `.astro` files and its type-check doesn't cover `.astro` templates: `astro check` (`@astrojs/check`) does, and `staged` runs it too. `react/purity` is off because components render once at build time.
 
 ## Notes
 

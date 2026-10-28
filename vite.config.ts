@@ -42,5 +42,8 @@ export default defineConfig({
   },
   staged: {
     '*': 'vp check --fix',
+    // vp check no entra a los templates .astro; astro check revisa el
+    // proyecto entero, por eso no recibe la lista de archivos
+    '*.{astro,ts,tsx}': () => 'astro check',
   },
 })
