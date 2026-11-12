@@ -11,6 +11,7 @@ import {
   Megaphone,
   MessageCircle,
   Sparkles,
+  Sprout,
 } from 'lucide-react'
 
 import { Button } from '@/components/Button'
@@ -48,8 +49,8 @@ function Contact() {
         <span className="ml-3">¿Trabajamos juntos?</span>
       </h2>
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Estoy abierto a proyectos freelance y colaboraciones. Contame qué querés
-        construir y te paso una cotización sin costo.
+        Contame qué querés resolver y te paso una cotización sin costo. También
+        me podés escribir si buscás sumar a alguien a tu equipo.
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <Button href="/services#cotizar" className="flex-1">
@@ -84,32 +85,98 @@ interface Highlight {
 
 const highlights: Array<Highlight> = [
   {
-    title: 'Productos de punta a punta',
+    title: 'Productos completos',
     description:
-      'Plataformas in-house, e-commerce, blogs, chatbots e integraciones de APIs, desde la interfaz hasta la base de datos.',
+      'Plataformas internas, e-commerce, blogs, chatbots e integraciones de APIs, del frontend al backend.',
   },
   {
     title: 'Datos que se usan',
     description:
-      'Pipelines, ETLs, transformación de datos y reportes en BigQuery y Looker Studio para decidir con información real.',
+      'Pipelines, ETLs, transformación de datos y reportes en BigQuery y Looker Studio, para que los números sirvan para decidir.',
   },
   {
     title: 'Automatización con IA',
     description:
-      'Procesos repetitivos resueltos con IA, n8n e integraciones, para operaciones más eficientes.',
+      'Tareas repetitivas resueltas con IA, n8n e integraciones, para ahorrar horas de trabajo manual.',
   },
   {
-    title: 'Criterio técnico y de costos',
+    title: 'Tecnología a la medida del proyecto',
     description:
-      'Elijo cada tecnología según lo que el proyecto necesita, con una inversión responsable de recursos e infraestructura.',
+      'Elijo cada herramienta según lo que el proyecto necesita y lo que cuesta mantenerla, sin sumar infraestructura de más.',
   },
 ]
+
+interface Venture {
+  name: string
+  role: string
+  description: string
+  href: string
+  icon: LucideIcon
+}
+
+const ventures: Array<Venture> = [
+  {
+    name: 'Spotter',
+    role: 'CTO & Cofounder',
+    description:
+      'App social de fitness que conecta a personas que entrenan en el mismo gimnasio y horario.',
+    href: 'https://www.gospotter.app',
+    icon: Dumbbell,
+  },
+  {
+    name: 'Momenrise',
+    role: 'Creador',
+    description:
+      'Web app gratuita de hábitos que se instala desde el navegador, con rachas, estadísticas e integración con IA.',
+    href: 'https://www.momenrise.com',
+    icon: Sprout,
+  },
+]
+
+function Ventures() {
+  return (
+    <section>
+      <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        Emprendimientos
+      </h2>
+      <Stagger
+        as="ul"
+        role="list"
+        className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2"
+      >
+        {ventures.map((venture) => (
+          <StaggerItem as="li" key={venture.name}>
+            <a
+              href={venture.href}
+              {...externalLinkProps(venture.href)}
+              className="group block h-full rounded-2xl border border-zinc-100 p-6 transition hover:border-teal-500/40 dark:border-zinc-700/40"
+            >
+              <venture.icon
+                className="h-6 w-6 text-teal-500 dark:text-teal-400"
+                strokeWidth={1.5}
+              />
+              <h3 className="mt-4 text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+                {venture.name}
+                <span className="ml-2 text-xs font-normal text-zinc-500 dark:text-zinc-400">
+                  {venture.role}
+                </span>
+              </h3>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                {venture.description}
+              </p>
+            </a>
+          </StaggerItem>
+        ))}
+      </Stagger>
+    </section>
+  )
+}
 
 function Highlights() {
   return (
     <section>
       <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        Cómo puedo ayudarte
+        En qué puedo ayudar
       </h2>
       <Stagger
         as="ul"
@@ -228,20 +295,17 @@ export function Home() {
           </StaggerItem>
           <StaggerItem>
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-              Full Stack Developer, CTO & Cofounder de{' '}
-              <span className="bg-linear-to-r from-teal-500 to-emerald-400 bg-clip-text text-transparent">
-                Spotter
-              </span>
-              .
+              Full Stack & Forward Deployed Engineer.
             </h1>
           </StaggerItem>
           <StaggerItem>
             <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-              Soy Hernán, desarrollador Full Stack con más de 5 años de
-              experiencia, en Buenos Aires. Construyo soluciones de punta a
-              punta, desde la interfaz hasta la base de datos, trabajo con datos
-              y automatizo procesos con IA. Trabajé con clientes como Bezza Pay,
-              Taca Taca y MetaAlign, y hoy estoy construyendo Spotter.
+              Soy desarrollador Full Stack y trabajo como Forward Deployed
+              Engineer: me meto de cerca en el problema de cada cliente, sea una
+              empresa o una sola persona, y me hago cargo hasta que funciona en
+              producción. Frontend, backend, datos y automatización con IA. Pasé
+              por Bezza Pay, Taca Taca y MetaAlign, y hoy además estoy
+              construyendo Spotter y Momenrise.
             </p>
           </StaggerItem>
           <StaggerItem className="mt-6 flex gap-6">
@@ -275,6 +339,9 @@ export function Home() {
             </Reveal>
           </div>
         </div>
+      </Container>
+      <Container className="mt-24 md:mt-28">
+        <Ventures />
       </Container>
     </>
   )
