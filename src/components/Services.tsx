@@ -42,7 +42,7 @@ const services: Array<Service> = [
   {
     title: 'Plataformas y apps a medida',
     description:
-      'Sistemas internos, dashboards y productos SaaS de punta a punta: desde la interfaz hasta la base de datos, pensados para escalar sin volverse una carga operativa.',
+      'Sistemas internos, dashboards y productos SaaS, de la interfaz a la base de datos, armados para que crecer no te cueste el doble de mantenerlos.',
     icon: LayoutDashboard,
     includes: [
       'Arquitectura y elección de stack',
@@ -55,7 +55,7 @@ const services: Array<Service> = [
   {
     title: 'Sitios web y landings',
     description:
-      'Sitios rápidos, optimizados para SEO y pensados para convertir visitas en clientes.',
+      'Sitios rápidos y con buen SEO, para que te encuentren y te escriban.',
     icon: Globe,
     includes: [
       'Diseño responsive y performance',
@@ -67,7 +67,7 @@ const services: Array<Service> = [
   {
     title: 'Migración de plataformas',
     description:
-      'Paso tu sistema o sitio a una plataforma moderna sin perder datos ni usuarios, y sin cortar el servicio.',
+      'Paso tu sistema o sitio a una tecnología nueva sin perder datos ni usuarios, y sin cortar el servicio.',
     icon: DatabaseZap,
     includes: [
       'Migración de datos y contenido',
@@ -79,7 +79,7 @@ const services: Array<Service> = [
   {
     title: 'Datos y reportes',
     description:
-      'Pipelines, ETLs y dashboards para que tu equipo decida con información real y actualizada.',
+      'Pipelines, ETLs y dashboards para que mires números actualizados y no planillas armadas a mano.',
     icon: BarChart3,
     includes: [
       'ETLs e integración de fuentes',
@@ -91,7 +91,7 @@ const services: Array<Service> = [
   {
     title: 'Automatización con IA',
     description:
-      'Automatizo tareas repetitivas y procesos operativos con IA, n8n e integraciones, para que tu equipo se enfoque en lo que suma valor.',
+      'Automatizo tareas repetitivas y procesos operativos con IA, n8n e integraciones, para que dejes de hacer a mano lo que se repite.',
     icon: Bot,
     includes: [
       'Chatbots e integraciones con LLMs',
@@ -149,7 +149,7 @@ const faqs = [
   {
     question: '¿Trabajás con clientes de otros países?',
     answer:
-      'Sí, trabajo de forma remota desde Buenos Aires con clientes de Argentina y del exterior.',
+      'Sí, trabajo de forma remota con clientes de Argentina y del exterior.',
   },
 ]
 

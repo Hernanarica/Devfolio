@@ -175,7 +175,7 @@ const principles = [
   {
     title: 'Automatizar lo repetitivo',
     description:
-      'Si una tarea se repite, se automatiza. IA y flujos con n8n para que el equipo se enfoque en lo que suma valor.',
+      'Si una tarea se repite, se automatiza. IA y flujos con n8n para no perder horas en tareas repetitivas.',
   },
 ]
 
