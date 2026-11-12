@@ -18,11 +18,11 @@ export interface Job {
 }
 
 export const resume = {
-  headline: 'Full Stack Developer · CTO & Cofounder en Spotter',
+  headline: 'Full Stack & Forward Deployed Engineer',
   location: 'Buenos Aires, Argentina',
   phone: '+54 9 11 3936-1854',
   summary:
-    'Desarrollador Full Stack con más de 5 años de experiencia construyendo productos web de punta a punta con React, Next.js, Node.js y TypeScript. Experiencia en Supabase, PostgreSQL y Google Cloud Platform, pipelines de datos y ETLs en BigQuery, y automatización de procesos con IA y n8n. Lideré equipos de desarrollo, definí arquitecturas y optimicé costos de infraestructura. Actualmente CTO & Cofounder de Spotter.',
+    'Desarrollador Full Stack con más de 5 años de experiencia (React, Next.js, Node.js y TypeScript) y Forward Deployed Engineer: trabajo de cerca con cada cliente para entender su problema, integrar sistemas y llevar la solución a producción. Experiencia en Supabase (PostgreSQL) y Google Cloud Platform, pipelines de datos y ETLs en BigQuery, y automatización de procesos con IA y n8n. Lideré equipos de desarrollo, definí arquitecturas y optimicé costos de infraestructura. Actualmente CTO & Cofounder de Spotter.',
   jobs: [
     {
       id: 'spotter',
@@ -56,7 +56,7 @@ export const resume = {
     {
       id: 'freelance',
       company: 'Freelance',
-      title: 'Full Stack Developer',
+      title: 'Full Stack & Forward Deployed Engineer',
       location: 'Remoto',
       start: { label: '2022', dateTime: '2022' },
       end: null,
@@ -102,11 +102,12 @@ export const resume = {
     },
     {
       group: 'Backend',
-      items: 'Node.js, Express, Supabase, FastAPI, Firebase, APIs REST, BFF',
+      items:
+        'Node.js, Express, Supabase (PostgreSQL), FastAPI, Firebase, APIs REST, BFF',
     },
     {
       group: 'Datos',
-      items: 'PostgreSQL, BigQuery, Firestore, Looker Studio, Fivetran, ETL',
+      items: 'BigQuery, Firestore, Looker Studio, Fivetran, ETL',
     },
     {
       group: 'Cloud y DevOps',

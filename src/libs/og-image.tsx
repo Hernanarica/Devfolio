@@ -95,21 +95,8 @@ export async function renderOgImage() {
             color: '#f4f4f5',
           }}
         >
-          <div style={{ display: 'flex' }}>Full Stack Developer,</div>
-          <div style={{ display: 'flex' }}>
-            CTO & Cofounder de
-            <span
-              style={{
-                marginLeft: 18,
-                backgroundImage: 'linear-gradient(90deg, #14b8a6, #34d399)',
-                backgroundClip: 'text',
-                color: 'transparent',
-              }}
-            >
-              Spotter
-            </span>
-            .
-          </div>
+          <div style={{ display: 'flex' }}>Full Stack &</div>
+          <div style={{ display: 'flex' }}>Forward Deployed Engineer.</div>
         </div>
 
         <div
@@ -125,7 +112,6 @@ export async function renderOgImage() {
             <span style={{ color: '#f4f4f5', fontWeight: 700 }}>
               {site.name}
             </span>
-            <span style={{ marginLeft: 12 }}>· Buenos Aires</span>
           </div>
           <div style={{ display: 'flex' }}>{domain}</div>
         </div>

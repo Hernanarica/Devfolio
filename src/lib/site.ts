@@ -5,10 +5,10 @@ export const site = {
   name: 'Hernán',
   // Solo para metadatos no visibles (SEO, datos estructurados)
   fullName: 'Hernán Arica',
-  title: 'Hernán - Full Stack Developer & CTO de Spotter',
-  jobTitle: 'Full Stack Developer',
+  title: 'Hernán - Full Stack & Forward Deployed Engineer',
+  jobTitle: 'Full Stack & Forward Deployed Engineer',
   description:
-    'Soy Hernán, desarrollador Full Stack con más de 5 años de experiencia y CTO & Cofounder de Spotter. Construyo productos web de punta a punta, pipelines de datos y automatizaciones con IA desde Buenos Aires.',
+    'Soy Hernán, desarrollador Full Stack y Forward Deployed Engineer. Me meto de cerca en cada problema y lo llevo a producción: productos web, datos y automatizaciones con IA. Además construyo mis propios productos, como Spotter y Momenrise.',
   email: 'hernan.arica96@gmail.com',
   xHandle: '@Hernan__Arica',
   locale: 'es_AR',
@@ -22,6 +22,8 @@ export const site = {
   },
   keywords: [
     'Hernán Arica',
+    'Forward Deployed Engineer',
+    'FDE',
     'Full Stack Developer',
     'desarrollador Full Stack',
     'desarrollador freelance',
