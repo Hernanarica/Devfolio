@@ -6,6 +6,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Stagger, StaggerItem } from '@/components/Reveal'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import imageBezzaPay from '@/images/projects/bezzapay.jpg'
+import imageCuentasClaras from '@/images/projects/cuentasclaras.webp'
 import imageIndigoHub from '@/images/projects/indigohub.jpg'
 import imageMetaAlign from '@/images/projects/metaalign.webp'
 import imageMomenrise from '@/images/projects/momenrise.webp'
@@ -43,6 +44,15 @@ const projects: Array<Project> = [
       { href: 'https://app.momenrise.com', label: 'Abrir la app' },
       { href: 'https://www.momenrise.com', label: 'momenrise.com' },
     ],
+  },
+  {
+    name: 'Cuentas Claras',
+    role: 'Full Stack · Uso privado del cliente',
+    description:
+      'App web de finanzas del hogar para un cliente. Maneja cuentas y tarjetas con cuotas, presupuestos por categoría, metas, deudas y movimientos recurrentes, con roles por miembro, tutoriales guiados y exportación a Excel.',
+    stack: ['React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Zustand'],
+    image: imageCuentasClaras,
+    links: [],
   },
   {
     name: 'MetaAlign',
@@ -109,57 +119,66 @@ const projects: Array<Project> = [
       stagger={0.12}
       className="grid grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2"
     >
-      {projects.map((project) => (
-        <StaggerItem as="li" className="flex flex-col">
-          <a
-            href={project.links[0].href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group block overflow-hidden rounded-2xl bg-zinc-100 shadow-sm ring-1 ring-zinc-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10 dark:bg-zinc-800 dark:ring-white/10"
-          >
-            <Image
-              src={project.image}
-              alt={`Captura de ${project.name}`}
-              widths={[400, 800, 1200]}
-              sizes="(min-width: 768px) 24rem, 100vw"
-              class="aspect-16/10 w-full object-cover object-top transition duration-300 group-hover:scale-[1.04]"
-            />
-            <span class="sr-only">
-              Visitar {project.name} (se abre en una pestaña nueva)
-            </span>
-          </a>
-          <h2 class="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-            {project.name}
-          </h2>
-          <p class="mt-1 text-xs font-medium text-zinc-400 dark:text-zinc-500">
-            {project.role}
-          </p>
-          <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-            {project.description}
-          </p>
-          <ul role="list" class="mt-4 flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
-              <li class="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-                {tech}
-              </li>
-            ))}
-          </ul>
-          <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2">
-            {project.links.map((link) => (
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group/link inline-flex items-center gap-1 text-sm font-medium text-teal-500 transition hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300"
-              >
-                {link.label}
-                <ArrowUpRight className="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                <span class="sr-only">(se abre en una pestaña nueva)</span>
-              </a>
-            ))}
-          </div>
-        </StaggerItem>
-      ))}
+      {projects.map((project) => {
+        // Los proyectos de clientes privados no tienen link: la imagen no es clickeable
+        const href = project.links[0]?.href
+        const Cover = href ? 'a' : 'div'
+
+        return (
+          <StaggerItem as="li" className="flex flex-col">
+            <Cover
+              {...(href
+                ? { href, target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+              class="group block overflow-hidden rounded-2xl bg-zinc-100 shadow-sm ring-1 ring-zinc-900/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10 dark:bg-zinc-800 dark:ring-white/10"
+            >
+              <Image
+                src={project.image}
+                alt={`Captura de ${project.name}`}
+                widths={[400, 800, 1200]}
+                sizes="(min-width: 1024px) 31rem, (min-width: 768px) 45vw, 100vw"
+                quality={95}
+                class="aspect-16/10 w-full object-cover object-top transition duration-300 group-hover:scale-[1.04]"
+              />
+              {href && (
+                <span class="sr-only">
+                  Visitar {project.name} (se abre en una pestaña nueva)
+                </span>
+              )}
+            </Cover>
+            <h2 class="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
+              {project.name}
+            </h2>
+            <p class="mt-1 text-xs font-medium text-zinc-400 dark:text-zinc-500">
+              {project.role}
+            </p>
+            <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
+              {project.description}
+            </p>
+            <ul role="list" class="mt-4 flex flex-wrap gap-2">
+              {project.stack.map((tech) => (
+                <li class="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+              {project.links.map((link) => (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group/link inline-flex items-center gap-1 text-sm font-medium text-teal-500 transition hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300"
+                >
+                  {link.label}
+                  <ArrowUpRight className="h-4 w-4 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                  <span class="sr-only">(se abre en una pestaña nueva)</span>
+                </a>
+              ))}
+            </div>
+          </StaggerItem>
+        )
+      })}
     </Stagger>
   </SimpleLayout>
 </SiteLayout>
