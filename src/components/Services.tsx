@@ -79,17 +79,18 @@ const services: Array<Service> = [
   {
     title: 'Datos y reportes',
     description:
-      'Pipelines, ETLs y dashboards para que mires números actualizados y no planillas armadas a mano.',
+      'Pipelines, ETLs y dashboards para que mires datos actualizados y no planillas armadas a mano.',
     icon: BarChart3,
     includes: [
       'ETLs e integración de fuentes',
       'Modelado en BigQuery o Postgres',
       'Dashboards en Looker Studio',
+      'Reportes de gross profit, rentabilidad y forecast',
     ],
     example: 'Reporting para Indigo y MetaAlign',
   },
   {
-    title: 'Automatización con IA',
+    title: 'Automatizaciones e IA',
     description:
       'Automatizo tareas repetitivas y procesos operativos con IA, n8n e integraciones, para que dejes de hacer a mano lo que se repite.',
     icon: Bot,

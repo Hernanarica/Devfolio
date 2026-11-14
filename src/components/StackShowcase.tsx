@@ -98,7 +98,7 @@ const categories: Array<Category> = [
     ],
   },
   {
-    title: 'IA y automatización',
+    title: 'Automatizaciones e IA',
     tagline:
       'Lo repetitivo se automatiza. Desarrollo asistido por IA todos los días y flujos que integran APIs e IA para operar más con menos.',
     icon: Bot,

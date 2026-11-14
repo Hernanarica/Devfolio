@@ -8,7 +8,7 @@ export const site = {
   title: 'Hernán - Full Stack & Forward Deployed Engineer',
   jobTitle: 'Full Stack & Forward Deployed Engineer',
   description:
-    'Soy Hernán, desarrollador Full Stack y Forward Deployed Engineer. Me meto de cerca en cada problema y lo llevo a producción: productos web, datos y automatizaciones con IA. Además construyo mis propios productos, como Spotter y Momenrise.',
+    'Soy Hernán, desarrollador Full Stack y Forward Deployed Engineer. Trabajo codo a codo con cada cliente y llevo el problema hasta producción: productos web, datos, automatizaciones e IA. Además construyo mis propios productos, como Spotter y Momenrise.',
   email: 'hernan.arica96@gmail.com',
   xHandle: '@Hernan__Arica',
   locale: 'es_AR',
