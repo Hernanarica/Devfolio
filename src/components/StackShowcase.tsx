@@ -15,7 +15,6 @@ import {
   Workflow,
 } from 'lucide-react'
 import {
-  type SimpleIcon,
   siClaude,
   siDocker,
   siExpress,
@@ -43,11 +42,12 @@ import {
 } from 'simple-icons'
 import clsx from 'clsx'
 
+import { type BrandIcon, hermesAgentIcon, openaiIcon } from '@/libs/brandIcons'
 import { SpotlightCard, Stagger, StaggerItem } from '@/components/Motion'
 
 interface Tech {
   name: string
-  icon: SimpleIcon | LucideIcon
+  icon: BrandIcon | LucideIcon
 }
 
 interface Category {
@@ -64,7 +64,7 @@ const categories: Array<Category> = [
   {
     title: 'Frontend',
     tagline:
-      'Interfaces rápidas y cuidadas. React y Next.js para productos con mucha interacción; Astro cuando lo que importa es el contenido y el SEO.',
+      'Interfaces rápidas y cuidadas. React y Next.js para productos con mucha interacción; Astro cuando lo que importa es el contenido, el SEO y la velocidad.',
     icon: LayoutTemplate,
     techs: [
       { name: 'React', icon: siReact },
@@ -76,7 +76,8 @@ const categories: Array<Category> = [
   },
   {
     title: 'Lenguajes',
-    tagline: 'TypeScript en todo lo que tenga que crecer. Python para datos.',
+    tagline:
+      'TypeScript en todo lo que tenga que crecer. Python para datos y para armar ETLs.',
     icon: Code2,
     techs: [
       { name: 'TypeScript', icon: siTypescript },
@@ -87,7 +88,7 @@ const categories: Array<Category> = [
   {
     title: 'Backend',
     tagline:
-      'APIs, integraciones y BFFs. Supabase para salir rápido a producción sin descuidar costos.',
+      'APIs, integraciones y BFFs. Supabase para escalar y salir rápido a producción con costos controlados: bases de datos en tiempo real, almacenamiento y funciones perimetrales.',
     icon: Server,
     techs: [
       { name: 'Node.js', icon: siNodedotjs },
@@ -100,11 +101,13 @@ const categories: Array<Category> = [
   {
     title: 'Automatizaciones e IA',
     tagline:
-      'Lo repetitivo se automatiza. Desarrollo asistido por IA todos los días y flujos que integran APIs e IA para operar más con menos.',
+      'Automatizo con IA los procesos repetitivos de tu negocio para que tu equipo gane tiempo.',
     icon: Bot,
     techs: [
       { name: 'Claude Code', icon: siClaude },
       { name: 'n8n', icon: siN8n },
+      { name: 'Hermes Agent', icon: hermesAgentIcon },
+      { name: 'ChatGPT', icon: openaiIcon },
     ],
     highlights: [
       'Chatbots e integraciones con LLMs',
@@ -118,7 +121,7 @@ const categories: Array<Category> = [
   {
     title: 'Datos y analytics',
     tagline:
-      'Pipelines, ETLs y reportes para que los equipos decidan con datos reales.',
+      'Pipelines, data lake, data warehouse y reportes para que los equipos decidan con datos reales.',
     icon: BarChart3,
     techs: [
       { name: 'BigQuery', icon: siGooglebigquery },
@@ -128,8 +131,10 @@ const categories: Array<Category> = [
     ],
     highlights: [
       'ETLs e ingesta desde múltiples fuentes',
-      'Modelado y transformación en BigQuery',
+      'Data lake en BigQuery con los datos crudos',
+      'Data warehouse en PostgreSQL con los datos ya curados',
       'Dashboards en Looker Studio para los equipos',
+      'Reportes de gross profit, rentabilidad y forecast',
       'Métricas de campañas y costos de infraestructura',
     ],
     className: 'lg:col-span-2',
@@ -149,7 +154,7 @@ const categories: Array<Category> = [
   {
     title: 'Producto y diseño',
     tagline:
-      'Implementé Linear desde cero en Indigo. Figma para bajar ideas a pantallas junto a diseño.',
+      'Linear para ordenar y priorizar el trabajo del equipo, Figma para bajar ideas a pantallas junto a diseño.',
     icon: PenTool,
     techs: [
       { name: 'Linear', icon: siLinear },
@@ -165,7 +170,7 @@ const principles = [
   {
     title: 'Primero el problema',
     description:
-      'Entiendo qué necesita el negocio antes de elegir herramientas. La mejor tecnología es la que resuelve el problema real.',
+      'Entiendo qué necesita el negocio antes de elegir herramientas. La mejor tecnología es la que resuelve el problema real, sin sobredimensionarlo.',
   },
   {
     title: 'Costos bajo control',
@@ -179,7 +184,7 @@ const principles = [
   },
 ]
 
-function isSimpleIcon(icon: Tech['icon']): icon is SimpleIcon {
+function isSimpleIcon(icon: Tech['icon']): icon is BrandIcon {
   return typeof icon === 'object' && 'path' in icon
 }
 
@@ -194,7 +199,7 @@ function TechIcon({
         aria-hidden="true"
         className={clsx('fill-current', className)}
       >
-        <path d={icon.path} />
+        <path d={icon.path} fillRule={icon.evenodd ? 'evenodd' : undefined} />
       </svg>
     )
   }
