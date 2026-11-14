@@ -5,12 +5,12 @@ import {
   CalendarDays,
   Download,
   Dumbbell,
+  FileText,
   Laptop,
   type LucideIcon,
   Mail,
   Megaphone,
   MessageCircle,
-  Sparkles,
 } from 'lucide-react'
 
 import { Button } from '@/components/Button'
@@ -53,7 +53,7 @@ function Contact() {
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <Button href="/services#cotizar" className="flex-1">
-          <Sparkles className="h-4 w-4" />
+          <FileText className="h-4 w-4" />
           Pedir cotización
         </Button>
         <Button
