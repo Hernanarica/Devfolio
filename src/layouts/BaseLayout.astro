@@ -166,6 +166,18 @@ const personJsonLd = {
       type="application/ld+json"
       set:html={JSON.stringify(personJsonLd)}
     />
+    <script
+      is:inline
+      async
+      src="https://www.googletagmanager.com/gtm.js?id=GTM-NWLPKKFJ"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+    </script>
     <slot name="head" />
   </head>
   <body class="flex h-full bg-(--edge)">
