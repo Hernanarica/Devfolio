@@ -7,7 +7,6 @@ import {
   Bot,
   Cloud,
   Code2,
-  Database,
   LayoutTemplate,
   type LucideIcon,
   PenTool,
@@ -42,7 +41,12 @@ import {
 } from 'simple-icons'
 import clsx from 'clsx'
 
-import { type BrandIcon, hermesAgentIcon, openaiIcon } from '@/libs/brandIcons'
+import {
+  type BrandIcon,
+  fivetranIcon,
+  hermesAgentIcon,
+  openaiIcon,
+} from '@/libs/brandIcons'
 import { SpotlightCard, Stagger, StaggerItem } from '@/components/Motion'
 
 interface Tech {
@@ -127,7 +131,7 @@ const categories: Array<Category> = [
       { name: 'BigQuery', icon: siGooglebigquery },
       { name: 'PostgreSQL', icon: siPostgresql },
       { name: 'Looker Studio', icon: siLooker },
-      { name: 'Fivetran', icon: Database },
+      { name: 'Fivetran', icon: fivetranIcon },
     ],
     highlights: [
       'ETLs e ingesta desde múltiples fuentes',
