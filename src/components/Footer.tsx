@@ -31,8 +31,8 @@ export function Footer() {
                 <NavLink href="/stack">Stack</NavLink>
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Hernán Arica. Hecho en Buenos
-                Aires.
+                &copy; {new Date().getFullYear()} Hernán Arica. Todos los
+                derechos reservados.
               </p>
             </div>
           </ContainerInner>
