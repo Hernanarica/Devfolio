@@ -49,7 +49,7 @@ export const resume = {
       bullets: [
         'Lideré el desarrollo de IndigoHub, una aplicación interna, con un equipo de 3 personas, definiendo arquitectura, stack y procesos.',
         'Optimicé costos de infraestructura en Google Cloud Platform y Supabase.',
-        'Desarrollé ETLs, pipelines de datos y reportes con BigQuery, Fivetran y Looker Studio.',
+        'Desarrollé ETLs, pipelines de datos, un data lake en BigQuery y un data warehouse en Postgres, con Fivetran y reportes en Looker Studio.',
         'Implementé Linear desde cero, estructurando flujos de trabajo y priorización del equipo.',
       ],
     },

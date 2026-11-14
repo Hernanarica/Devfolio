@@ -91,7 +91,7 @@ const highlights: Array<Highlight> = [
   {
     title: 'Datos que se usan',
     description:
-      'Pipelines, ETLs, transformación de datos y reportes en BigQuery y Looker Studio, para que los datos sirvan para decidir. También armo reportes de gross profit, rentabilidad y forecast para negocios.',
+      'Pipelines, ETLs, data lake en BigQuery y data warehouse en Postgres, y reportes en Looker Studio, para que los datos sirvan para decidir. También armo reportes de gross profit, rentabilidad y forecast para negocios.',
   },
   {
     title: 'Automatizaciones e IA',
