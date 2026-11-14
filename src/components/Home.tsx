@@ -11,7 +11,6 @@ import {
   Megaphone,
   MessageCircle,
   Sparkles,
-  Sprout,
 } from 'lucide-react'
 
 import { Button } from '@/components/Button'
@@ -92,10 +91,10 @@ const highlights: Array<Highlight> = [
   {
     title: 'Datos que se usan',
     description:
-      'Pipelines, ETLs, transformación de datos y reportes en BigQuery y Looker Studio, para que los números sirvan para decidir.',
+      'Pipelines, ETLs, transformación de datos y reportes en BigQuery y Looker Studio, para que los datos sirvan para decidir. También armo reportes de gross profit, rentabilidad y forecast para negocios.',
   },
   {
-    title: 'Automatización con IA',
+    title: 'Automatizaciones e IA',
     description:
       'Tareas repetitivas resueltas con IA, n8n e integraciones, para ahorrar horas de trabajo manual.',
   },
@@ -105,72 +104,6 @@ const highlights: Array<Highlight> = [
       'Elijo cada herramienta según lo que el proyecto necesita y lo que cuesta mantenerla, sin sumar infraestructura de más.',
   },
 ]
-
-interface Venture {
-  name: string
-  role: string
-  description: string
-  href: string
-  icon: LucideIcon
-}
-
-const ventures: Array<Venture> = [
-  {
-    name: 'Spotter',
-    role: 'CTO & Cofounder',
-    description:
-      'App social de fitness que conecta a personas que entrenan en el mismo gimnasio y horario.',
-    href: 'https://www.gospotter.app',
-    icon: Dumbbell,
-  },
-  {
-    name: 'Momenrise',
-    role: 'Creador',
-    description:
-      'Web app gratuita de hábitos que se instala desde el navegador, con rachas, estadísticas e integración con IA.',
-    href: 'https://www.momenrise.com',
-    icon: Sprout,
-  },
-]
-
-function Ventures() {
-  return (
-    <section>
-      <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        Emprendimientos
-      </h2>
-      <Stagger
-        as="ul"
-        role="list"
-        className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2"
-      >
-        {ventures.map((venture) => (
-          <StaggerItem as="li" key={venture.name}>
-            <a
-              href={venture.href}
-              {...externalLinkProps(venture.href)}
-              className="group block h-full rounded-2xl border border-zinc-100 p-6 transition hover:border-teal-500/40 dark:border-zinc-700/40"
-            >
-              <venture.icon
-                className="h-6 w-6 text-teal-500 dark:text-teal-400"
-                strokeWidth={1.5}
-              />
-              <h3 className="mt-4 text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                {venture.name}
-                <span className="ml-2 text-xs font-normal text-zinc-500 dark:text-zinc-400">
-                  {venture.role}
-                </span>
-              </h3>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                {venture.description}
-              </p>
-            </a>
-          </StaggerItem>
-        ))}
-      </Stagger>
-    </section>
-  )
-}
 
 function Highlights() {
   return (
@@ -301,11 +234,18 @@ export function Home() {
           <StaggerItem>
             <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
               Soy desarrollador Full Stack y trabajo como Forward Deployed
-              Engineer: me meto de cerca en el problema de cada cliente, sea una
-              empresa o una sola persona, y me hago cargo hasta que funciona en
-              producción. Frontend, backend, datos y automatización con IA. Pasé
-              por Bezza Pay, Taca Taca y MetaAlign, y hoy además estoy
-              construyendo Spotter y Momenrise.
+              Engineer: trabajo codo a codo con cada cliente, sea una empresa o
+              una sola persona, para entender el problema de fondo y lo acompaño
+              hasta que funciona en producción. Frontend, backend, datos,
+              automatizaciones e IA. Pasé por Bezza Pay, Taca Taca y MetaAlign,
+              y hoy además estoy construyendo{' '}
+              <a
+                href="/projects"
+                className="font-medium text-teal-500 hover:text-teal-600 dark:text-teal-400"
+              >
+                Spotter y Momenrise
+              </a>
+              .
             </p>
           </StaggerItem>
           <StaggerItem className="mt-6 flex gap-6">
@@ -339,9 +279,6 @@ export function Home() {
             </Reveal>
           </div>
         </div>
-      </Container>
-      <Container className="mt-24 md:mt-28">
-        <Ventures />
       </Container>
     </>
   )
