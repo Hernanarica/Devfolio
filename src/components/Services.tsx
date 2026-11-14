@@ -13,6 +13,8 @@ import {
   BarChart3,
   CalendarDays,
   Bot,
+  BrainCircuit,
+  Compass,
   Check,
   ChevronDown,
   DatabaseZap,
@@ -34,7 +36,6 @@ interface Service {
   description: string
   icon: LucideIcon
   includes: Array<string>
-  example: string
   className?: string
 }
 
@@ -49,7 +50,6 @@ const services: Array<Service> = [
       'Autenticación, roles y paneles de gestión',
       'Integraciones con APIs y servicios externos',
     ],
-    example: 'MetaAlign, IndigoHub, Spotter',
     className: 'lg:col-span-2',
   },
   {
@@ -62,7 +62,6 @@ const services: Array<Service> = [
       'SEO técnico y analítica',
       'Panel para editar contenido',
     ],
-    example: 'Bezza Pay, Spotter',
   },
   {
     title: 'Migración de plataformas',
@@ -74,7 +73,6 @@ const services: Array<Service> = [
       'Convivencia gradual entre plataformas',
       'Usuarios y SEO preservados',
     ],
-    example: 'OM Personal, con más de 68.000 usuarios',
   },
   {
     title: 'Datos y reportes',
@@ -83,11 +81,10 @@ const services: Array<Service> = [
     icon: BarChart3,
     includes: [
       'ETLs e integración de fuentes',
-      'Modelado en BigQuery o Postgres',
+      'Data lake en BigQuery y data warehouse en Postgres con tus datos curados',
       'Dashboards en Looker Studio',
       'Reportes de gross profit, rentabilidad y forecast',
     ],
-    example: 'Reporting para Indigo y MetaAlign',
   },
   {
     title: 'Automatizaciones e IA',
@@ -99,7 +96,30 @@ const services: Array<Service> = [
       'Flujos automáticos entre herramientas',
       'Reportes y tareas que corren solos',
     ],
-    example: 'Automatizaciones y ETLs en Indigo',
+  },
+  {
+    title: 'Asistentes y agentes de IA',
+    description:
+      'Asistentes de IA a medida que trabajan con los datos y las herramientas de tu negocio: consultan, deciden y ejecutan, no solo responden en un chat.',
+    icon: BrainCircuit,
+    includes: [
+      'Asistentes internos sobre tus documentos y datos',
+      'Agentes que ejecutan acciones: crear tickets, actualizar el CRM, enviar reportes',
+      'Conexión con tus sistemas vía APIs y MCP',
+    ],
+    className: 'lg:col-span-2',
+  },
+  {
+    title: 'Consultoría técnica',
+    description:
+      'Una mirada técnica externa cuando la necesitás, sin sumar a alguien full time: te ayudo a decidir qué construir y cómo.',
+    icon: Compass,
+    includes: [
+      'Auditoría de código e infraestructura',
+      'Reducción de costos cloud',
+      'Definición de arquitectura y stack',
+      'Acompañamiento técnico a tu equipo',
+    ],
   },
 ]
 
@@ -140,7 +160,7 @@ const faqs = [
   {
     question: '¿Trabajás con equipos o empresas que ya tienen desarrolladores?',
     answer:
-      'Sí. Puedo sumarme a un equipo existente, liderar técnicamente un proyecto o encargarme de una parte puntual como datos o automatizaciones.',
+      'Sí. Puedo sumarme a un equipo existente, liderar técnicamente un proyecto o encargarme de una parte puntual como datos, automatizaciones o IA.',
   },
   {
     question: '¿Qué pasa después del lanzamiento?',
@@ -195,12 +215,6 @@ function ServiceCard({ service }: { service: Service }) {
           </li>
         ))}
       </ul>
-      <p className="mt-5 border-t border-zinc-100 pt-4 text-xs text-zinc-400 dark:border-zinc-700/40 dark:text-zinc-500">
-        Ejemplos:{' '}
-        <span className="font-medium text-zinc-600 dark:text-zinc-300">
-          {service.example}
-        </span>
-      </p>
     </SpotlightCard>
   )
 }
